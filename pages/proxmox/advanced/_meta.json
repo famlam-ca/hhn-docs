@@ -1,0 +1,4 @@
+{
+  "enable-nested-virtualization": "Enable Nested Virtualization",
+  "clustering-proxmox": "Clustering Proxmox"
+}

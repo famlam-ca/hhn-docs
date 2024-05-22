@@ -1,0 +1,62 @@
+# Disk Passthrough on Proxmox
+
+**_NOTE_**: It is highly recommended to take notes of the device, serial number and device id.
+
+See [Sample Notes](#sample-notes) for example.
+
+## Install Required Tools
+
+1. **Install `lshw`**
+
+   ```bash copy
+   apt install lshw
+   ```
+
+2. **List Disk and Storage Information**
+
+   ```bash copy
+   lshw -class disk -class storage
+   ```
+
+3. **List Block Devices with Device IDs**
+
+   ```bash copy
+   lsblk | awk 'NR==1{print $0" DEVICE-ID(S)"} NR>1{dev=$1; printf $0" "; system("find /dev/disk/by-id -lname \"\*"dev"\" -printf \" %p\""); print "";}' | grep -v -E 'print|lvm'
+   ```
+
+4. **Set Up Disk Passthrough**
+
+   ```bash copy
+   qm set <VMID> -scsi<UNUSED SCSI#> /dev/disk/by-id/ata-xxxxxxxxxxx-xxxxxx_xxxxxxxx
+   ```
+
+   **_NOTE_**: UNUSED SCSI# must be incremented for each disk.
+
+## Backup and Edit VM Configuration
+
+1. **Backup the VM Configuration File**
+
+   ```bash copy
+   cp /etc/pve/qemu-server/<VMID>.conf /root/<VMID>-backup.conf
+   ```
+
+2. **Edit the VM Configuration File**
+
+   ```bash copy
+   nano /etc/pve/qemu-server/<VMID>.conf
+   ```
+
+   - Append `,serial=<SERIAL#>` to the end of each added disk line.
+
+## Sample Notes
+
+- **For `/dev/sdc`:**
+
+  - Serial: `W9A34BTN`
+  - Device ID: `ata-ST1000DM003-1SB102_W9A34BTN`
+
+- **For `/dev/sdd`:**
+  - Serial: `Z1DB25YT`
+  - Device ID: `ata-ST1000DM003-1CH162_Z1DB25YT`
+
+Happy virtualizing!

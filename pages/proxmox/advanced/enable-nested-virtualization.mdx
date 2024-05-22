@@ -1,0 +1,72 @@
+# Enable Nested Virtualization on Proxmox
+
+**_Note_**: VMs with nesting active (vmx/svm flag) cannot be live-migrated! To be done on the physical PVE host (or any other hypervisor).
+
+To enable nested hardware-assisted virtualization:
+
+- Ensure you have an AMD CPU or a very recent Intel one.
+- Ensure your kernel version is >= 3.10 (usually the case after Proxmox VE 4.x).
+- Enable nested support.
+
+### Check Nested Virtualization Status
+
+To check if nested virtualization is enabled:
+
+```bash copy
+cat /sys/module/kvm_intel/parameters/nested
+```
+
+```bash filename="Output"
+N
+```
+
+If it shows "N", it means it's not enabled. To activate it for Intel CPUs:
+
+```bash copy
+echo "options kvm-intel nested=Y" > /etc/modprobe.d/kvm-intel.conf
+```
+
+For AMD CPUs:
+
+```bash copy
+echo "options kvm-amd nested=1" > /etc/modprobe.d/kvm-amd.conf
+```
+
+Reboot or reload the kernel module:
+
+```bash copy
+modprobe -r kvm_intel
+modprobe kvm_intel
+```
+
+Check again:
+
+```bash copy
+cat /sys/module/kvm_intel/parameters/nested
+```
+
+```bash filename="Output"
+Y
+```
+
+**_Note:_** Pay attention to the use of dash "-" and underscore "\_" in the module names.
+
+### Configure Virtual Machine
+
+Then, create a guest where you install, for example, Proxmox as nested Virtualization Environment. Set the CPU type to "host":
+
+```bash copy
+qm set <vmid> --cpu host
+```
+
+### Verify Nested Virtualization
+
+Once the guest OS is installed, if it's GNU/Linux, you can enter and verify that hardware virtualization support is enabled by doing:
+
+```bash copy
+egrep '(vmx|svm)' --color=always /proc/cpuinfo
+```
+
+That's it! You've enabled nested hardware-assisted virtualization.
+
+Happy virtualizing!

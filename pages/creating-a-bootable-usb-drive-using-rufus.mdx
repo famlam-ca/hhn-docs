@@ -1,0 +1,76 @@
+# Creating a Bootable USB Drive using Rufus
+
+## Summary
+
+Rufus is a free and open-source utility that helps format and create bootable USB flash drives. It is commonly used to create installation media from bootable ISO files for various operating systems such as Windows, Linux, and other utilities. Rufus is particularly known for its speed and efficiency in creating bootable drives and supports both UEFI and legacy BIOS systems.
+
+### Key Features:
+
+- Create bootable USB drives from ISO files
+- Supports various file systems (FAT32, NTFS, UDF, etc.)
+- Works with UEFI and legacy BIOS systems
+- Portable application, no installation required
+
+## Requirements
+
+- A USB drive with at least 8 GB of storage
+- A Windows computer
+- Rufus software [Rufus website](https://rufus.ie)
+- ISO file of the operating system you want to install
+
+## Steps
+
+1. **Download and Install Rufus**
+
+   - Visit the [Rufus website](https://rufus.ie) and download the latest version of Rufus.
+   - Once downloaded, run the executable file to launch Rufus (no installation is needed as Rufus is a portable application).
+
+2. **Insert Your USB Drive**
+
+   - Plug your USB drive into an available USB port on your computer.
+
+3. **Select the USB Drive in Rufus**
+
+   - Open Rufus. In the **Device** dropdown, select your USB drive. Make sure you choose the correct drive as this process will erase all data on the selected USB drive.
+
+4. **Select the ISO File**
+
+   - In the **Boot selection** section, click the **SELECT** button and browse to the location of your ISO file. Choose the ISO file you want to use for creating the bootable USB drive.
+
+5. **Configure Partition Scheme and File System**
+
+   - Under **Partition scheme**, select `MBR` if you need to boot on legacy BIOS systems, or `GPT` for UEFI systems. If unsure, `GPT` is a safe default on newer systems.
+   - The **File system** is typically set to `NTFS` or `FAT32`. Rufus will automatically choose the best option based on your ISO file. You can usually leave this as is.
+
+6. **Start the Process**
+
+   - Once you’ve configured the options, click the **START** button.
+   - You may be prompted with a warning that all data on the USB drive will be destroyed. Confirm to proceed.
+
+7. **Wait for Completion**
+
+   - Rufus will begin creating the bootable USB drive. This process may take several minutes depending on the size of the ISO file and the speed of your USB drive.
+   - Once the process is complete, you’ll see the status as **READY**.
+
+8. **Eject the USB Drive**
+
+   - Click the **CLOSE** button to exit Rufus.
+   - Safely eject your USB drive from the computer, by locating a USB drive symbol on your taskbar and right clicking it. From the context menu eject the USB drive that you are using for this guide.
+
+## Boot from the USB Drive
+
+1. **Restart Your Computer**
+
+   - Insert the bootable USB drive into the computer where you want to install the OS.
+   - Restart the computer.
+
+2. **Enter Boot Menu**
+
+   - During the boot process, press the key that opens the boot menu (usually F2, F10, F12, ESC, or DEL depending on your computer's motherboard).
+   - When in doubt pressing all of them has never failed me.
+
+3. **Select USB Drive**
+
+   - From the boot menu, select your USB drive to start the installation process.
+
+You have now successfully created a bootable USB drive using Rufus. Happy installing!

@@ -1,0 +1,19 @@
+{
+  "index": "Introduction",
+  "creating-a-bootable-usb-drive-using-rufus": "Creating a Bootable USB Drive using Rufus",
+  "creating-a-bootable-usb-drive-using-ventoy": "Creating a Bootable USB Drive using Ventoy",
+  "proxmox": "Proxmox",
+  "truenas": "TrueNAS",
+  "about": {
+    "title": "About ↗",
+    "type": "page",
+    "href": "https://www.famlam.ca/about",
+    "newWindow": true
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://www.famlam.ca/contact",
+    "newWindow": true
+  }
+}
