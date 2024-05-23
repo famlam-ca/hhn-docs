@@ -1,5 +1,7 @@
 HHN Documentation project using [Nextra](https://nextra.site/) for HHN projects.
 
+![App Screenshot](/public/hhn-docs.png)
+
 ## 🔗 Links
 
 **Live Sites**
@@ -25,4 +27,4 @@ For any questions or feedback, feel free to reach out to [support](https://www.f
 
 ## License
 
-[MIT](https://github.com/famlam-ca/hhn-documentation/blob/master/LICENSE.md)
+[MIT](https://github.com/famlam-ca/hhn-documentation/blob/main/LICENSE)

@@ -1,8 +1,16 @@
 import { Globe } from "lucide-react"
+import Image from "next/image"
 import { DocsThemeConfig } from "nextra-theme-docs"
 
+import EditLink from "./components/edit-link"
+
 const config: DocsThemeConfig = {
-  logo: <span>HHN Docs</span>,
+  logo: (
+    <>
+      <Image src="/favicon.ico" alt="logo" height={25} width={25} />
+      <p>HHN Docs</p>
+    </>
+  ),
   banner: {
     dismissible: true,
     text: "Happy Virtualizing!",
@@ -16,7 +24,8 @@ const config: DocsThemeConfig = {
     link: "https://www.famlam.ca",
   },
   editLink: {
-    text: "Edit this page on GitHub",
+    component: EditLink,
+    text: "Edit this page on GitHub →",
   },
   toc: {
     backToTop: true,
