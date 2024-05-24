@@ -4,8 +4,6 @@ placeholder text
 
 **New Gudies**
 
-**All Guides**
-
 **Bug fixes**
 
 **Full Changelog**:

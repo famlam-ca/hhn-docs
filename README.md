@@ -16,6 +16,10 @@ HHN Documentation project using [Nextra](https://nextra.site/) for HHN projects.
 - [HHN Prototype](https://github.com/famlam-ca/hhn-prototype "old.famlam.ca Github Repo")
 - [HHN Documentation](https://github.com/famlam-ca/hhn-documentation "old.famlam.ca Github Repo")
 
+**Contribute**
+
+If you're interested in contributing to this project, please check out the full details [here](https://github.com/famlam-ca/hhn-documentation/blob/main/CONTRIBUTING.md). (Coming soon)
+
 ## Support
 
 For any questions or feedback, feel free to reach out to [support](https://www.famlam.ca/contact/support), or contact me directly [here](https://www.famlam.ca/contact).
