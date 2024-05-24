@@ -18,7 +18,7 @@ HHN Documentation project using [Nextra](https://nextra.site/) for HHN projects.
 
 **Contribute**
 
-If you're interested in contributing to this project, please check out the full details [here](https://github.com/famlam-ca/hhn-documentation/blob/main/CONTRIBUTING.md). (Coming soon)
+If you're interested in contributing to this project, please check out the full details [here](https://github.com/famlam-ca/hhn-documentation/blob/main/CONTRIBUTING.md).
 
 ## Support
 
