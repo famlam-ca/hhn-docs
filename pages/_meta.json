@@ -5,6 +5,7 @@
   "creating-a-bootable-usb-drive-using-ventoy": "Creating a Bootable USB Drive using Ventoy",
   "proxmox": "Proxmox",
   "truenas": "TrueNAS",
+  "dockerCLI": "Docker-CLI",
   "about": {
     "title": "About ↗",
     "type": "page",
