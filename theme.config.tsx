@@ -30,10 +30,13 @@ const config: DocsThemeConfig = {
   toc: {
     backToTop: true,
   },
+  sidebar: {
+    defaultMenuCollapseLevel: 1,
+    toggleButton: true,
+  },
   feedback: {
     useLink: () => "https://www.famlam.ca/contact/support",
   },
-  gitTimestamp: true, // TODO: Implement this
   docsRepositoryBase: "https://github.com/famlam-ca/hhn-documentation",
   footer: {
     text: "Humble Home Network Documuentation",

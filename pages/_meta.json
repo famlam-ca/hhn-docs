@@ -1,8 +1,7 @@
 {
   "index": "Introduction",
-  "contribute": "How to Contribute",
-  "creating-a-bootable-usb-drive-using-rufus": "Creating a Bootable USB Drive using Rufus",
-  "creating-a-bootable-usb-drive-using-ventoy": "Creating a Bootable USB Drive using Ventoy",
+  "want-to-contribute": "Want to Contribute?",
+  "bootable-usb-drive": "Bootable USB Drive",
   "proxmox": "Proxmox",
   "truenas": "TrueNAS",
   "dockerCLI": "Docker-CLI",
