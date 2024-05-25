@@ -7,8 +7,8 @@ HHN Documentation project using [Nextra](https://nextra.site/) for HHN projects.
 **Live Sites**
 
 - [www.famlam.ca](https://www.famlam.ca "www.famlam.ca Homepage")
-- [play.famlam.ca](https://play.famlam.ca "play.famlam.ca Homepage") -- will be moved to www.famlam.ca/games
 - [old.famlam.ca](https://old.famlam.ca "old.famlam.ca Homepage")
+- [docs.famlam.ca](https://docs.famlam.ca "docs.famlam.ca Homepage")
 
 **Repositories**
 
@@ -19,6 +19,8 @@ HHN Documentation project using [Nextra](https://nextra.site/) for HHN projects.
 **Contribute**
 
 If you're interested in contributing to this project, please check out the full details [here](https://github.com/famlam-ca/hhn-documentation/blob/main/CONTRIBUTING.md).
+
+**Code of Conduct**
 
 ## Support
 

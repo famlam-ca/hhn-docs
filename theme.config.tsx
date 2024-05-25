@@ -30,6 +30,10 @@ const config: DocsThemeConfig = {
   toc: {
     backToTop: true,
   },
+  sidebar: {
+    defaultMenuCollapseLevel: 1,
+    toggleButton: true,
+  },
   feedback: {
     useLink: () => "https://www.famlam.ca/contact/support",
   },
