@@ -16,11 +16,13 @@ HHN Documentation project using [Nextra](https://nextra.site/) for HHN projects.
 - [HHN Prototype](https://github.com/famlam-ca/hhn-prototype "old.famlam.ca Github Repo")
 - [HHN Documentation](https://github.com/famlam-ca/hhn-documentation "old.famlam.ca Github Repo")
 
-**Contribute**
+## Contribute
 
 If you're interested in contributing to this project, please check out the full details [here](https://github.com/famlam-ca/hhn-documentation/blob/main/CONTRIBUTING.md).
 
-**Code of Conduct**
+## Code of Conduct
+
+We expect all contributors and participants in the HHN project community to adhere to our Code of Conduct. Please familiarize yourself with it before engaging with the project. You can find the full details [here](https://github.com/famlam-ca/hhn-documentation/blob/main/CODE_OF_CONDUCT.md).
 
 ## Support
 
