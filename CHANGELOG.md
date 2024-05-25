@@ -12,7 +12,7 @@
 
 ## What's Changed
 
-- First Merge of DockerCLI by @DesPartedNecturm in https://github.com/famlam-ca/hhn-documentation/pull/2
+- First Merge of Docker stuff by @DesPartedNecturm in https://github.com/famlam-ca/hhn-documentation/pull/2
 
 ## New Contributors
 
