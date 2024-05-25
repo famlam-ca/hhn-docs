@@ -31,7 +31,7 @@ Within your CLI enviroment, type
 sudo apt install docker-compose
 ```
 This will install docker compose and other packages needed for docker-cli. These will be used in different guides.  
-You may be prompted yes/no, type "y" and press enter.
+*You may be prompted yes/no, type "y" and press enter.*
 
 3. **Wait for Installation to Finish**
 
@@ -49,7 +49,7 @@ sudo usermod -aG docker <user>
 ```
 This will not take effect immediately, you will either need to run "sudo newgrp docker" or create a new session.  
 This will allow you to run docker-cli commands without prefixing "sudo" to them.  
->***You will not need to do this if you run all commands as root or are the root user.***
+>*You will not need to do this if you run all commands as root or are the root user.*
 
 ## Troubleshooting
 
@@ -58,4 +58,4 @@ This will allow you to run docker-cli commands without prefixing "sudo" to them.
 ## Notes
 1. Depending on your distro of choice <sub><sup><sup>\(I use arch btw\)</sup></sup></sub> you may not be able do anything, or commands may be different, such as many debian-based systems using "apt" and arch-based systems using "pacman".
 2. Unless you've setup something like a repository locally and can pull from there, you're gonna wanna get packages from internet sources.
-3. Substitute user for whichever user you will be using, usually your main one. Standard issue command to add a user to a group, `man usermod` for details if you wish.
+3. Substitute user for whichever user you will be using, usually your current one. Standard issue command to add a user to a group, `man usermod` for details if you wish.
