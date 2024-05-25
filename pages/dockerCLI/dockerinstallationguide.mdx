@@ -8,9 +8,9 @@
 - A Linux Operating System
 - Internet Access
 
-Reasons for Requirements:
-You will need some form of system capable of running Linux, this is usually a desktop PC for testing purposes.
-A Linux Distro such as Uwuntu works fine, however, see note 1.
+Reasons for Requirements:  
+You will need some form of system capable of running Linux, this is usually a desktop PC for testing purposes.  
+A Linux Distro such as Uwuntu works fine, however, see note 1.  
 Internet access is recommended for installing packages, see note 2 for details.
 
 ## Presumptions
@@ -21,8 +21,7 @@ This guide will follow a Ubuntu operating system where you will be a user that h
 
 1. **Open up a CLI**
 
-This will depend on your linux distribution, however many will allow you to open open one from right-click context menu on your desktop, or searching for "terminal" in a start menu.
-
+This will depend on your linux distribution, however many will allow you to open open one from right-click context menu on your desktop, or searching for "terminal" in a start menu.  
 <sub><sup>Tis Docker-cli, so expect many CLI actions.</sup></sub>
 
 2. **Install Packages**
@@ -31,7 +30,7 @@ Within your CLI enviroment, type
 ```bash copy
 sudo apt install docker-compose
 ```
-This will install docker compose and other packages needed for docker-cli. These will be used in different guides.
+This will install docker compose and other packages needed for docker-cli. These will be used in different guides.  
 You may be prompted yes/no, type "y" and press enter.
 
 3. **Wait for Installation to Finish**
@@ -40,14 +39,14 @@ The time will vary depending on your internet speeds and other factors. as long 
 
 4. **Finish**
 
-Once it is finished installing (usually when it goes back to your prompt) you can continue on to other guides, however it is highly recommended and future guides will assume that you do the following optional steps.
+Once it is finished installing (usually when it goes back to your prompt) you can continue on to other guides, *however it is highly recommended and future guides will assume that you do the following optional steps.*
 
 Opt 1. **Give your User Docker Privileges**
 
-Run the following command, "sudo usermod -aG docker \<user>" (see note 3.)
-This will not take effect immediately, you will either need to run "sudo newgrp docker" or create a new session.
-This will allow you to run docker-cli commands without prefixing "sudo" to them.
-You will not need to do this if you run all commands as root or are the root user.
+Run the following command, "sudo usermod -aG docker \<user>" (see note 3.)  
+This will not take effect immediately, you will either need to run "sudo newgrp docker" or create a new session.  
+This will allow you to run docker-cli commands without prefixing "sudo" to them.  
+***You will not need to do this if you run all commands as root or are the root user.***
 
 ## Troubleshooting
 
