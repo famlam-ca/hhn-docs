@@ -1,4 +1,18 @@
-# 1.0.3 Changelog
+# Changelog
+
+## 1.0.4 Changelog
+
+**Modified**
+
+- `7. **Copy ISO Files to USB Drive**` info block
+
+**Bug fixes**
+
+- Become a Contributor link did not redirect correctly
+
+**Full Changelog**: [1.0.3...1.0.4](https://github.com/famlam-ca/hhn-documentation/compare/1.0.3...1.0.4)
+
+## 1.0.3 Changelog
 
 **Added**
 
@@ -10,19 +24,17 @@
 - How to Install Docker CLI on an Ubuntu Node
 - Barebones Setup for Docker CLI
 
-## What's Changed
+### What's Changed
 
 - First Merge of Docker stuff by @DesPartedNecturm in https://github.com/famlam-ca/hhn-documentation/pull/2
 
-## New Contributors
+### New Contributors
 
 - @DesPartedNecturm made their first contribution in https://github.com/famlam-ca/hhn-documentation/pull/2
 
 **Full Changelog**: [1.0.2...1.0.3](https://github.com/famlam-ca/hhn-documentation/compare/1.0.2...1.0.3)
 
----
-
-# 1.0.2 Changelog
+## 1.0.2 Changelog
 
 **Added**
 
@@ -45,9 +57,7 @@
 
 **Full Changelog**: [1.0.1...1.0.2](https://github.com/famlam-ca/hhn-documentation/compare/1.0.1...1.0.2)
 
----
-
-# 1.0.1 Changelog
+## 1.0.1 Changelog
 
 **Added**
 
@@ -65,9 +75,7 @@
 
 **Full Changelog**: [1.0.0...1.0.1](https://github.com/famlam-ca/hhn-documentation/compare/1.0.0...1.0.1)
 
----
-
-# 1.0.0 Changelog
+## 1.0.0 Changelog
 
 Initial Commit
 
