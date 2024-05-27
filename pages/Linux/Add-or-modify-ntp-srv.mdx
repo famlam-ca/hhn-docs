@@ -1,0 +1,55 @@
+# Adding or Modifiying list of NTP Servers
+
+## Summary
+
+Linux uses NTP servers to keep their date and time "current" to the outer world. Some issues can arise when it isn't working.  
+
+## Preamble  
+
+You usually don't have issues with NTP servers, and you should check your DNS and Network first if you have NTP issues.
+
+## Requirements
+
+- Linux Operating System (Tested on EndeavourOS)
+- Text Editor
+
+## Steps
+
+1. **Start Editing the NTP Servers File**  
+
+```bash copy
+sudo vim /etc/ntp.conf
+```  
+Use an editor<sup>1</sup> on the NTP Servers file.  
+
+*This file should be the same for most, if not all Linux Distributions.*
+
+2. **Add or Modify Pools/Servers**  
+
+There is usually a server/pool or multple servers/pools that already exist<sup>3</sup>.  
+An example from [Here](https://www.ntppool.org/zone/ca) is:  
+```bash copy
+server 2.ca.pool.ntp.org
+```  
+
+You can usually search the internet for your region's NTP Pool if you wanted to add them.  
+Comment out or remove lines if you don't want to use certain pools/servers.
+
+4. **Save your Edits**  
+
+Press `Esc` then `:` then type `wq` then press `Enter`<sup>2</sup>  
+
+*This will save the file and exit you from vim.*  
+
+**You have Finished**  
+
+## Conclusion  
+
+You have now learned to modify your NTP Sources for a Linux OS. Happy Time Shenanigans!<sup>4</sup>
+
+## Notes  
+
+1. The editor can be whatever you want, depending on what you like to use or what is installed. <sub><sup>Nano can be popular.</sup></sub>  
+2. This will depend on your editer. `Ctrl-X` `Enter` `Enter` for Nano users.  
+3. The file itself may offer some helpful links and information.  
+4. `timedatectl` can be used for some time stuff. `date` too.
