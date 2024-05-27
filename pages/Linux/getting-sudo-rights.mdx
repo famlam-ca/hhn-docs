@@ -60,9 +60,9 @@ You may now use sudo for any commands you want to run as root or are too lazy to
 
 ## Notes
 
-1. `su - root` the `su` is actually kinda a part of sudo, and it has some other uses `man su`, here, we are using it in conjunction with `-`(`-l --login`) to login to root, we don't actually need `-` for this guide, as we aren't doing anything in root's home directory, so we could've used `su root` instead if we wanted.  
+1. `su - root` the `su` is actually kinda a part of sudo, and it has some other uses `man su`, here, we are using it in conjunction with `-`(`-l --login`) to login to root, we don't actually need `-` for this guide, as we aren't doing anything in root's home directory, so we could've used `su root` instead if we wanted. We could also omit `root` as su defaults to `root`.  
 2. If you don't: You'll get read access to sudoers, and you'll edit the file only to find out you can't save. And I'll just add that keeping the access/owner to the file/s unchanged is probably better than not.  
-3. The editor can be whatever you want, depending on what you like to use or what is installed. <sub><sup>Nano can be popular.</sup></sub>  
+3. The editor can be whatever you want, depending on what you like to use or what is installed. <sub>Nano can be popular.</sub>  
 4. If you already have sudo rights, you could just `sudo nano /etc/sudoers` directly.
 5. There's a lot more that can be done here, such as restricting what commands can be sudo'd, allowing sudo for groups, the file may tell you what you can do. Or just allow full access because why not.  
 6. This will depend on your editer. `Ctrl-X` `Enter` `Enter` for Nano users.
