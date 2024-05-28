@@ -5,7 +5,7 @@
   "proxmox": "Proxmox",
   "truenas": "TrueNAS",
   "dockerCLI": "Docker-CLI",
-  "Linux": "General Linux Guides",
+  "linux": "Linux Guides",
   "about": {
     "title": "About ↗",
     "type": "page",
