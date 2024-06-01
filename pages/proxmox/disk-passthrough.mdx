@@ -1,8 +1,8 @@
 # Disk Passthrough on Proxmox
 
-**_NOTE_**: It is highly recommended to take notes of the device, serial number and device id.
-
-See [Sample Notes](#sample-notes) for example.
+> It is highly recommended to take notes of the device, serial number and device id.
+>
+> See [Sample Notes](#sample-notes) for example.
 
 ## Install Required Tools
 
@@ -30,7 +30,7 @@ See [Sample Notes](#sample-notes) for example.
    qm set <VMID> -scsi<UNUSED SCSI#> /dev/disk/by-id/ata-xxxxxxxxxxx-xxxxxx_xxxxxxxx
    ```
 
-   **_NOTE_**: UNUSED SCSI# must be incremented for each disk.
+   > **_NOTE_**: UNUSED SCSI# must be incremented for each disk.
 
 ## Backup and Edit VM Configuration
 

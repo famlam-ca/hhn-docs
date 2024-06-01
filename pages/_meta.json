@@ -6,6 +6,7 @@
   "truenas": "TrueNAS",
   "dockerCLI": "Docker-CLI",
   "linux": "Linux Guides",
+  "windows": "Windows Guides",
   "about": {
     "title": "About ↗",
     "type": "page",

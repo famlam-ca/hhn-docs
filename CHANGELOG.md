@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.5 Changelog
+
+**Modified**
+
+- `**_NOTE_**:` to appear in callout boxes
+- Formatting in various guides
+
+**New Guides**
+
+- Installing WSL 2 with Ubuntu
+
 ## 1.0.4 Changelog
 
 **Modified**

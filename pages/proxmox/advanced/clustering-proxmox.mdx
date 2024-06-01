@@ -1,10 +1,12 @@
 # Clustering Proxmox with Three Nodes
 
-**_NOTE_**: This guide is not fully tested, and subject to change.
+> This guide is not fully tested, and subject to change.
+
+## Introduction
 
 Clustering Proxmox provides high availability and load balancing for virtual machines and containers. With a minimum of three nodes, you can create a resilient cluster capable of tolerating the failure of a single node without downtime.
 
-## Why Three Nodes?
+### Why Three Nodes?
 
 Proxmox recommends a minimum of three nodes for a cluster due to several reasons:
 
@@ -22,7 +24,7 @@ Proxmox recommends a minimum of three nodes for a cluster due to several reasons
 - **Proxmox VE ISO**: Download the latest Proxmox VE ISO from the official website.
 - **Network Configuration**: Ensure that each server has a unique hostname, IP address, and is connected to a network accessible by all nodes.
 
-## Steps
+## Step-by-Step Guide
 
 ### 1. Install Proxmox VE on Each Node
 

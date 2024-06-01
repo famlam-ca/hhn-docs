@@ -1,7 +1,5 @@
 # TrueNAS Scale Setup Guide on Proxmox
 
-**Prerequisites**: [Disk Passthrough on Proxmox](/proxmox/disk-passthrough)
-
 ## Minimum Hardware Specs
 
 - 2-Core processor
@@ -9,7 +7,13 @@
 - 16 GB SSD boot device
 - Two+ identical-sized devices for a single storage pool
 
-## Install/Upgrade
+## Prerequisites
+
+- If you are installing TrueNAS scale on proxmox you must first passthrough each disk, or the entire storage controller: [Disk Passthrough on Proxmox](/proxmox/disk-passthrough)
+
+## Step-by-Step Guide
+
+### Install/Upgrade
 
 1. Select the boot device (should be at least 16 GB).
 2. Select YES to erase all partitions.
@@ -20,7 +24,7 @@
 6. Complete the installation.
 7. Reboot, or shutdown to remove installation media.
 
-## Basic Pool Setup
+### Basic Pool Setup
 
 1. **Navigate to the Web UI**
 
@@ -46,7 +50,7 @@
    - Click **Save And Go To Review**, unless you want a more advanced setup (not covered here).
    - Click **Create Pool**.
 
-## Create Datasets
+### Create Datasets
 
 1. Click **Datasets** in the sidebar.
 2. Click **Add Dataset** on the right side.
@@ -68,7 +72,7 @@
 
 6. Click **Save**.
 
-## Create Local Users and Groups
+### Create Local Users and Groups
 
 1. Click **Credentials** in the sidebar.
 2. Click **Local Groups**.
@@ -86,7 +90,7 @@
    - Set the **Primary Group** field to the previously created group, e.g., HomeUsers.
    - Click **Save**.
 
-   ### Home Directory Setup
+   #### Home Directory Setup
 
    - For **Home Directory**, navigate to the HomeShare dataset.
      **Home Directory is covered here later on in the documentation.**
@@ -112,7 +116,7 @@
 
 ### If Samba is already running
 
-**_NOTE:_** If you set up the Dataset with the SMB preset, you will not have to create an SMB share.
+> **_NOTE:_** If you set up the Dataset with the SMB preset, you will not have to create an SMB share.
 
 1. Click **Shares** in the sidebar.
 2. Click **Add** in the Windows (SMB) Shares section.
