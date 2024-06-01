@@ -24,7 +24,7 @@
 - Use the `copy` property, as shown in the example, to allow for easy copy-pasting.
 
 ````markdown copy
-```bash copy
+```copy
 code snippets
 ```
 ````
@@ -42,7 +42,7 @@ code snippets
 
 ### Links
 
-- Use inline links for web addresses or refergences.
+- Use inline links for web addresses or references.
 - Ensure links are working and relevant to the content.
 
 ```markdown copy

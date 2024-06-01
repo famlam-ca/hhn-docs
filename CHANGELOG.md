@@ -11,6 +11,8 @@
 
 - Installing WSL 2 with Ubuntu
 
+**Full Changelog**: [1.0.4...1.0.5](https://github.com/famlam-ca/hhn-documentation/compare/1.0.4...1.0.5)
+
 ## 1.0.4 Changelog
 
 **Modified**
