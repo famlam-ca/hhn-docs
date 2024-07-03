@@ -1,0 +1,203 @@
+import { Callout } from "nextra/components"
+
+# Installing Pterodactyl Wings
+
+<Callout type="warning">
+  Wings are designed to be used with Pterodactyl 1.x. DO NOT install this
+  software if you are using an older version of the Pterodactyl Panel.
+</Callout>
+
+## Introduction
+
+Pterodactyl wings are a crucial component of the Pterodactyl control panel, which is a popular open-source game server management tool. These wings provide the necessary backend functionality to support the control panel's features and allow users to easily manage their game servers.
+
+For more detailed information and official documentation, visit the [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html).
+
+## Prerequisites
+
+- Install a Linux OS [Ubuntu Installation Guide](guide_link).
+- Completed [Installing Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
+- Root access to your servers is required.
+
+## Supported Systems
+
+| Operating System | Version | Supported | Notes                                                                                                                                       |
+| ---------------- | ------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ubuntu           | 18.04   | ✅        | The official [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html) is written assuming Ubuntu 18.04 as the base OS. |
+|                  | 20.04   | ✅        |                                                                                                                                             |
+|                  | 22.04   | ✅        |                                                                                                                                             |
+|                  | 24.04   | ✅        | This guide uses 24.04                                                                                                                       |
+| CentOS           | 7       | ✅        |                                                                                                                                             |
+|                  | 8       | ✅        | Note that CentOS 8 is EOL. Use Rocky or Alma Linux.                                                                                         |
+| Debian           | 11      | ✅        |                                                                                                                                             |
+|                  | 12      | ✅        |                                                                                                                                             |
+| Windows          | All     | ❌        | This software will not run in Windows environments.                                                                                         |
+
+## System Requirements
+
+Wings require a Linux system capable of running Docker containers.
+
+The easiest way to check if your machine is compatible is to type `systemd-detect-virt`. If the output does not contain OpenVZ or LXC, your machine should be compatible.
+
+For more information, please visit the official [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#system-requirements).
+
+## Step-by-Step Guide
+
+### 1. Installing Docker
+
+To install Docker using a one-liner, run the following command:
+
+```sh copy
+curl -sSL https://get.docker.com/ | CHANNEL=stable bash
+```
+
+If you prefer to manually install Docker, follow the official Docker documentation for your OS:
+
+- [Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-docker-ce)
+- [Debian](https://docs.docker.com/engine/install/debian/#install-docker-ce)
+- [CentOS](https://docs.docker.com/engine/install/centos/#install-docker-ce)
+
+<Callout type="default">
+Check your Kernel
+
+Some host providers may install modified versions of the Linux kernel, which might not support important Docker features. To check your kernel, run the command: `uname -r`. If your kernel is not supported, it will end in `-xxxx-grs-ipv6-64` or `-xxxx-mod-std-ipv6-64`.
+
+Check the official Pterodactyl guide for [Kernel Modifications](https://pterodactyl.io/daemon/0.6/kernel_modifications.html).
+
+</Callout>
+
+### 2. Start Docker on Boot
+
+To start Docker when your system starts, run the following command:
+
+```sh copy
+sudo systemctl enable --now docker
+```
+
+**Enabling Swap**
+
+Docker may be unable to set up swap space on most systems. To confirm this, run `docker info` and look for a line that says `WARNING: No swap limit support` near the bottom of the output.
+
+**_NOTE:_** Swap is not required but recommended by the Pterodactyl Team if you will be hosting for others.
+
+To enable swap, open `/etc/default/grub` as the root user and find the line starting with `GRUB_CMDLINE_LINUX_DEFAULT`. Edit the value of `swapaccount` to `1`, like so `swapaccount=1`.
+
+Next, run sudo `update-grub` and `sudo reboot` or `systemctl reboot` to restart the server and enable swap.
+
+The following line is an example of what the line should look like:
+
+```sh copy
+GRUB_CMDLINE_LINUX_DEFAULT="swapaccount=1"
+```
+
+<Callout type="info">
+ GRUB Configuration
+
+Some Linux distros may ignore `GRUB_CMDLINE_LINUX_DEFAULT`. In this case, use `GRUB_CMDLINE_LINUX` instead.
+
+</Callout>
+
+### 3. Installing Wings
+
+Ensure you have the required directory structure. Create the following directory to ensure Wings works correctly:
+
+```sh copy
+sudo mkdir -p /etc/pterodactyl
+curl -L -o /usr/local/bin/wings "https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_$([[ "$(uname -m)" == "x86_64" ]] && echo "amd64" || echo "arm64")"
+sudo chmod u+x /usr/local/bin/wings
+```
+
+<Callout type="warning">
+ OVH/SYS Servers
+
+If your server provider is OVH or SoYouStart, note that your primary drive space might be allocated to `/home`, not `/` by default. In this case, consider using `/home/daemon-data` for server data.
+
+This can also be easily changed while creating the node.
+
+</Callout>
+
+### 4. Configure
+
+Once the installation of Wings and the required components is complete, you can create a node on your previously installed Panel. Go to your Panel's `Administrative View`, select `Nodes` on the left, and click `Create New`.
+
+After creating a node, navigate to the `Configuration` tab. Copy the contents of the code block and paste it into a new file called `config.yml` in `/etc/pterodactyl`, then save it.
+
+An alternative and easier way is to click on the `Generate Token` button on the right of the screen and paste the command into your Panel's terminal.
+
+<Callout type="warning">
+  When using SSL on your Panel, you must also use SSL for your Wings. To create
+  a FQDN using NPM for your Wings, follow this [guide](guide_link).
+</Callout>
+
+### 5. Starting Wings
+
+To start Wings, run the following command. This command starts the Wings process in debug mode. Look through the logs and ensure there are no errors. Once you have confirmed that everything is running smoothly, exit the process using `CTRL+C`.
+
+**_NOTE:_** Your internet connection may cause the initial pull/start of Wings to be slow.
+
+```sh copy
+sudo wings --debug
+```
+
+<Callout type="info">
+  The `--debug` flag is optional and is used in this step to ensure the correct
+  installation of Wings.
+</Callout>
+
+### 6. Daemonizing (using systemd)
+
+Much like the pteroq.service we created in this [guide](/server-hosting/pterodactyl/installing-pterodactyl-panel#2-create-queue-worker), we will create a service for Wings.
+
+This is done to run the service in the background. First, create a file called `wings.service` in the `/etc/systemd/system` directory:
+
+```sh copy
+sudo nano /etc/systemd/system/wings.service
+```
+
+Next, copy and paste the following block into the new file:
+
+```sh copy showLineNumbers
+[Unit]
+Description=Pterodactyl Wings Daemon
+After=docker.service
+Requires=docker.service
+PartOf=docker.service
+
+[Service]
+User=root
+WorkingDirectory=/etc/pterodactyl
+LimitNOFILE=4096
+PIDFile=/var/run/wings/daemon.pid
+ExecStart=/usr/local/bin/wings
+Restart=on-failure
+StartLimitInterval=180
+StartLimitBurst=30
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then, run the following command to reload systemd and start the Wings service:
+
+```sh copy
+sudo systemctl enable --now wings
+```
+
+### 7. Node Allocations
+
+To connect to a node in-game, you must assign an Allocation to it. This is done under the `Allocation` tab, still under Nodes.
+
+<Callout type="info">
+ To find the IP of your Wings server, type `hostname -I | awk '{print $1}'`. The output is the IP used for the allocation. You may also use this command instead: `ip addr | grep "inet "`.
+</Callout>
+
+<Callout type="error">DO NOT use 127.0.0.1 for allocations.</Callout>
+
+For more information, please see the official [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#node-allocations)
+
+## Conclusion
+
+Congratulations! You are now ready to host a game server for yourself and your friends. You've set up everything from installation to configuration, and your server is ready to provide a great gaming experience.
+
+Happy Hosting!

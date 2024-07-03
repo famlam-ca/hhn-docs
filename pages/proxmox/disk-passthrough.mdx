@@ -1,8 +1,13 @@
+import { Callout } from "nextra/components"
+
 # Disk Passthrough on Proxmox
 
-> It is highly recommended to take notes of the device, serial number and device id.
->
-> See [Sample Notes](#sample-notes) for example.
+<Callout type="default">
+It is highly recommended to take notes of the device, serial number and device id.
+
+See [Sample Notes](#sample-notes) for example.
+
+</Callout>
 
 ## Install Required Tools
 
@@ -30,7 +35,7 @@
    qm set <VMID> -scsi<UNUSED SCSI#> /dev/disk/by-id/ata-xxxxxxxxxxx-xxxxxx_xxxxxxxx
    ```
 
-   > **_NOTE_**: UNUSED SCSI# must be incremented for each disk.
+   **_NOTE:_** UNUSED SCSI# must be incremented for each disk.
 
 ## Backup and Edit VM Configuration
 

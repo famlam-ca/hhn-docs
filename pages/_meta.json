@@ -1,12 +1,34 @@
 {
-  "index": "Introduction",
-  "want-to-contribute": "Want to Contribute?",
+  "*": {
+    "theme": {}
+  },
+  "index": {
+    "title": "Introduction",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "want-to-contribute": {
+    "title": "Want to Contribute?",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "---": {
+    "type": "separator"
+  },
   "bootable-usb-drive": "Bootable USB Drive",
   "proxmox": "Proxmox",
   "truenas": "TrueNAS",
+  "server-hosting": "Server Hosting",
   "dockerCLI": "Docker-CLI",
   "linux": "Linux Guides",
   "windows": "Windows Guides",
+  "styling-guide": {
+    "title": "Styling Guide",
+    "display": "hidden"
+  },
+
   "about": {
     "title": "About ↗",
     "type": "page",
@@ -18,5 +40,12 @@
     "type": "page",
     "href": "https://www.famlam.ca/contact",
     "newWindow": true
+  },
+  "404": {
+    "type": "page",
+    "theme": {
+      "timestamp": false,
+      "typesetting": "article"
+    }
   }
 }

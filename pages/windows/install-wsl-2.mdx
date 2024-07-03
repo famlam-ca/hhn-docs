@@ -1,3 +1,5 @@
+import { Callout } from "nextra/components"
+
 # Installing WSL 2 with Ubuntu
 
 ## Introduction
@@ -39,7 +41,10 @@ With virtualization enabled, you can now enable WSL on your Windows 10/11 system
    wsl --install
    ```
 
-   > This command will enable WSL, install the latest WSL 2 Linux kernel, and set WSL 2 as the default version.
+   <Callout type="info">
+     This command will enable WSL, install the latest WSL 2 Linux kernel, and
+     set WSL 2 as the default version.
+   </Callout>
 
 ### 3. Install Ubuntu
 
@@ -53,7 +58,12 @@ With WSL enabled, the next step is to install Ubuntu.
 
 4. Once installed, click **Launch** to start Ubuntu. You will be prompted to create a new user account and password for your Ubuntu environment.
 
-> You can choose from various other Linux distributions available in the Microsoft Store, such as Debian, openSUSE, Kali Linux, and more​ [(Microsoft Learn)​](https://learn.microsoft.com/en-us/windows/wsl/install-manual)​ [(Winaero)​](https://winaero.com/list-available-wsl-linux-distros-windows-10/).
+<Callout type="default">
+  You can choose from various other Linux distributions available in the
+  Microsoft Store, such as Debian, openSUSE, Kali Linux, and more [(Microsoft
+  Learn)](https://learn.microsoft.com/en-us/windows/wsl/install-manual)
+  [(Winaero)](https://winaero.com/list-available-wsl-linux-distros-windows-10/).
+</Callout>
 
 ### 4. Verify Installation
 
@@ -105,7 +115,10 @@ If you encounter issues where the installation is not using WSL 2, it might be d
    wsl --set-version Ubuntu-20.04 2
    ```
 
-   > Replace `Ubuntu-20.04` with the appropriate distribution name if you are using a different version.
+   <Callout type="default">
+     Replace `Ubuntu-20.04` with the appropriate distribution name if you are
+     using a different version.
+   </Callout>
 
 4. **Restart WSL:**
    Restart the WSL to apply changes.

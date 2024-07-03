@@ -1,0 +1,186 @@
+# Example Environment
+
+## Base Env Setup
+
+```sh
+Egg Author Email [unknown@unknown.com]:
+ > your@email.com
+```
+
+> It is recommended to use an https connecion.
+
+```sh
+Application URL [http://panel.example.com]:
+ > https://panel.yourdomain.com
+```
+
+> Reference this https://php.net/manual/en/timezones.php for your specific timezone.
+
+```sh
+Application Timezone [UTC]:
+ > America/Vancouver
+```
+
+```sh
+Cache Driver [Filesystem]:
+  [redis    ] Redis (recommended)
+  [memcached] Memcached
+  [file     ] Filesystem
+ > redis
+
+Session Driver [Filesystem]:
+  [redis    ] Redis (recommended)
+  [memcached] Memcached
+  [database ] MySQL Database
+  [file     ] Filesystem
+  [cookie   ] Cookie
+ > redis
+
+ Queue Driver [Redis (recommended)]:
+  [redis   ] Redis (recommended)
+  [database] MySQL Database
+  [sync    ] Sync
+ > redis
+```
+
+```sh
+Enable UI based settings editor? (yes/no) [yes]:
+ > yes
+
+Enable sending anonymous telemetry data? (yes/no) [yes]:
+ > yes
+```
+
+## Database Env Setup
+
+> [NOTE] You've selected the Redis driver for one or more options, please provide valid connection information below. In most cases you can use the defaults provided unless you have modified your setup.
+
+```sh
+Redis Host [127.0.0.1]:
+ > 127.0.0.1
+```
+
+> By default a Redis server instance has no password as it is running locally and inaccessible to the outside world. If this is the case, simply hit enter without entering a value.
+
+```sh
+Redis Password:
+ >
+```
+
+```sh
+Redis Port [6379]:
+ > 6379
+```
+
+> [NOTE] It is highly recommended to not use "localhost" as your database host as we have seen frequent socket connection issues. If you want to use a local connection you should be using "127.0.0.1".
+
+```sh
+Database Host [127.0.0.1]:
+ > IP for you database server
+```
+
+> Please reference your database management systems for specific port requirements.
+
+```sh
+Database Port [3306]:
+ > 3306
+```
+
+```sh
+Database Name [panel]:
+ > panel
+```
+
+> [NOTE] Using the "root" account for MySQL connections is not only highly frowned upon, it is also not allowed by this application. You'll need to have created a MySQL user for this software.
+
+```sh
+Database Username [pterodactyl]:
+ > pterodactyl
+```
+
+> This password should be password used in the database configuration [here](/server-hosting/pterodactyl/installing-pterodactyl-panel#1database-configuration).
+
+```sh
+Database Password:
+ > <yourpassword>
+```
+
+## Mail Env Setup
+
+```sh
+Which driver should be used for sending emails? [SMTP Server]:
+  [smtp    ] SMTP Server
+  [sendmail] sendmail Binary
+  [mailgun ] Mailgun Transactional Email
+  [mandrill] Mandrill Transactional Email
+  [postmark] Postmark Transactional Email
+ > smtp
+```
+
+> You may use any smtp server you wish. In this example I am using sendgrid.
+
+```sh
+SMTP Host (e.g. smtp.gmail.com) [smtp.sendgrid.net]:
+ > smtp.sendgrid.net
+```
+
+```sh
+SMTP Port [587]:
+ > 587
+```
+
+```sh
+SMTP Username [apikey]:
+ > apikey
+```
+
+```sh
+SMTP Password:
+ > <yourpassword>
+```
+
+```sh
+Encryption method to use [TLS]:
+  [tls] TLS
+  [ssl] SSL
+  [   ] None
+ > TLS
+```
+
+```sh
+Email address emails should originate from [no-reply@yourdomain.com]:
+ > no-reply@famlam.ca
+```
+
+```sh
+Name that emails should appear from [Panel]:
+ > HHN Panel
+```
+
+## User Env Setup
+
+```sh
+Is this user an administrator? (yes/no) [no]:
+ > yes
+```
+
+```sh
+Email Address:
+ > your@email.com
+
+Username:
+ > your_user_name
+
+First Name:
+ > your_first_name
+
+Last Name:
+ > your_last_name
+```
+
+> Follow the required password policies on screen.
+
+```sh
+Password:
+ > <yourpassword>
+```

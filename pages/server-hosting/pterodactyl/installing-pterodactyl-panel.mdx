@@ -1,0 +1,312 @@
+import { Callout } from "nextra/components"
+
+# Installing Pterodactyl Panel
+
+## Introduction
+
+Pterodactyl is an open-source game server management panel built with PHP, React, and Go. It provides a robust platform for managing and deploying game servers with ease, offering features such as a user-friendly interface, support for various game servers, and secure and scalable architecture. This guide will walk you through the steps to install and set up the Pterodactyl Panel on your server, ensuring you have a solid foundation for managing your game servers.
+
+For more detailed information and official documentation, visit the [Pterodactyl documentation](https://pterodactyl.io/project/introduction.html).
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- Install a Linux OS [Ubuntu Installation Guide](/linux/installing-ubuntu-server-24-04).
+- (Optional) Setup a reverse network proxy [NPM Guide](/server-hosting/npm).
+- Root access to your server is required to run and use the Pterodactyl Panel.
+
+## Step-by-Step Guide
+
+### 1. Dependency Installation
+
+We will first begin by installing all of Pterodactyl's required dependencies.
+
+1. Add `add-apt-repository` command:
+
+   ```sh copy
+   sudo apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
+   ```
+
+2. Add additional repositories for `PHP`:
+
+   ```sh copy
+   LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+   # or
+   LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/nginx
+   ```
+
+3. Add `Redis` official APT repository:
+
+   ```sh copy
+   curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+   echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+   ```
+
+4. MariaDB repo setup script:
+
+   <Callout type="default">
+     MariaDB repo setup script can be skipped on Ubuntu 22.04+
+   </Callout>
+
+   ```sh copy
+   curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+   ```
+
+5. Update repositories list:
+
+   ```sh copy
+   apt update
+   ```
+
+6. Install dependencies:
+
+   ```sh copy
+   sudo apt -y install php8.1 php8.1-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
+   ```
+
+### 2. Installing Composer
+
+Composer is required for dependency management in PHP. It will be used to ship all code needed to operate the panel.
+
+```sh copy
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+```
+
+### 3. Download Files
+
+Before we can download the files, we need a place to store them.
+
+```sh copy
+mkdir -p /var/www/pterodactyl
+cd /var/www/pterodactyl
+```
+
+Once you've created the necessary directories for Pterodactyl, we can proceed to download the files.
+
+```sh copy
+curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
+tar -xzvf panel.tar.gz
+chmod -R 755 storage/* bootstrap/cache/
+```
+
+### 4. Installation
+
+Now that we have all the files needed, we can configure the base Panel.
+
+#### Database Configuration
+
+<Callout type="info">
+The following steps will show you how to configure a database on the Panel.
+
+Follow the same steps below, on a dedicated database server, and change the necessary DB\_\* environmental variables for a non-local database.
+
+</Callout>
+
+```sh copy
+mysql -u root -p
+```
+
+**_NOTE:_** Remember to change 'yourPassword' below to be a unique password.
+
+```sh copy
+CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
+CREATE DATABASE panel;
+GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;
+```
+
+#### Creating a Database Host for Nodes
+
+**_NOTE:_** You should change the username and password below to something unique.
+
+```sh copy
+CREATE USER 'pterodactyluser'@'127.0.0.1' IDENTIFIED BY 'somepassword';
+GRANT ALL PRIVILEGES ON *.* TO 'pterodactyluser'@'127.0.0.1' WITH GRANT OPTION;
+exit
+```
+
+#### Environment Configuration
+
+```sh copy
+cp .env.example .env
+composer install --no-dev --optimize-autoloader
+```
+
+<Callout type="warning">
+  Only run the below command for first-time installations of this Panel:
+</Callout>
+
+```sh copy
+php artisan key:generate --force
+```
+
+<Callout type="error">
+  Back up and keep your `.env` file safe after environment configuration is
+  complete.
+</Callout>
+
+Now we will populate the environmental variables inside `.env` via the following commands.
+
+<Callout type="info">
+  Running the following commands will prompt you to answer several questions.
+  You may check out the
+  [.env.example](/server-hosting/pterodactyl/example-env#base-env-setup) as a
+  reference for the following questions.
+</Callout>
+
+```sh copy
+php artisan p:environment:setup
+php artisan p:environment:database
+```
+
+<Callout type="warning">
+(NOT RECOMMENDED) To use PHP's internal mailing system, select "mail".
+
+For a custom SMTP server, such as Gmail, select "smtp".
+
+</Callout>
+
+See reference [.env.example](/server-hosting/pterodactyl/example-env#mail-env-setup).
+
+```sh copy
+php artisan p:environment:mail
+```
+
+#### Database Setup
+
+It is time to set up the database contents. The command below will create the database tables and all the base Nests and Eggs that come with Pterodactyl.
+
+**_NOTE:_** The command may take several minutes to complete, depending on your machine.
+
+<Callout type="error">
+  Please DO NOT exit the process until it is completed.
+</Callout>
+
+```sh copy
+php artisan migrate --seed --force
+```
+
+#### Add The First User
+
+Someone has to manage the Panel. The command below will create the very first user. This user should be made an administrator of the Panel. See reference [.env.example](/server-hosting/pterodactyl/example-env#user-env-setup).
+
+```sh copy
+php artisan p:user:make
+```
+
+#### Set Permissions
+
+The last step of the installation is to set the correct permissions on the Panel files.
+
+The following commands will change the owner of all the files and directories inside the pterodactyl directory.
+
+<Callout type="default">
+  Please read the command comments to find the command applicable to your
+  environment.
+</Callout>
+
+```sh copy
+# If using NGINX or Apache (not on CentOS)
+chown -R www-data:www-data /var/www/pterodactyl/*
+```
+
+```sh copy
+# If using NGINX on CentOS
+chown -R nginx:nginx /var/www/pterodactyl/*
+```
+
+```sh copy
+# If using Apache on CentOS
+chown -R apache:apache /var/www/pterodactyl/*
+```
+
+### 5. Queue Listeners
+
+For a more detailed explanation of queue listeners and what they do, see the official [Pterodactyl documentation](https://pterodactyl.io/panel/1.0/getting_started.html#queue-listeners).
+
+#### Crontab Configuration
+
+First, we need to edit crontab. For anyone who has never used crontab, crontab is a simple way to schedule tasks inside a Unix operating system. To edit crontab, run the following command.
+
+**_NOTE:_** You may be prompted to choose a text editor. The simplest way to edit a file such as crontab would be `nano` or `gedit`. However, experienced users are welcome to use `vi/vim`.
+
+```sh copy
+sudo crontab -e
+```
+
+Once inside crontab, append the following line at the bottom of the file.
+
+```sh copy
+* * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1
+```
+
+<Callout type="info">
+To save and exit nano, press `CTRL+S` and then `CTRL+X`.
+
+If you would like to view the contents of the crontab without opening the editor use `sudo crontab -l`
+
+</Callout>
+
+#### Create Queue Worker
+
+Next, we will create a new systemd worker to keep the previous process running continuously in the background. For more information, please visit the official [Pterodactyl\***\* \*\***documentation](https://pterodactyl.io/panel/1.0/getting_started.html#create-queue-worker).
+
+First, create a file called `pteroq.service` under the directory `/etc/systemd/system` like so:
+
+```sh copy
+sudo nano /etc/systemd/system/pteroq.service
+```
+
+Next, copy and paste the following block into the newly created file.
+
+```sh copy showLineNumbers
+# Pterodactyl Queue Worker File
+# ----------------------------------
+
+[Unit]
+Description=Pterodactyl Queue Worker
+After=redis-server.service
+
+[Service]
+# On some systems the user and group might be different.
+# Some systems use `apache` or `nginx` as the user and group.
+User=www-data
+Group=www-data
+Restart=always
+ExecStart=/usr/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
+StartLimitInterval=180
+StartLimitBurst=30
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Lastly, you need to enable and start the `redis-server` and the `pteroq.service` we just created.
+
+```sh copy
+sudo systemctl enable --now redis-server
+sudo systemctl enable --now pteroq.service
+```
+
+## Conclusion
+
+Congratulations! You have completed the installation of the Pterodactyl Panel. You can now move on to configuring the webserver to access the Panel and start creating servers to play with friends.
+
+Happy Hosting!
+
+## Video Tutorial
+
+For a more visual guide, you can watch this video tutorial on how to install Pterodactyl Panel, using docker:
+
+<div className="my-10">
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/_ypAmCcIlBE?si=gIpl3PV6mec2h5bs"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  />
+</div>
+
+Video by [Techno Tim](https://www.youtube.com/@TechnoTim).

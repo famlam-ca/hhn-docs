@@ -1,0 +1,94 @@
+import { Callout } from "nextra/components"
+
+# Installing Ubuntu Server
+
+## Introduction
+
+Ubuntu Server is a free, open-source Linux distribution based on Debian. It is designed to be used as a server operating system and is used by many organizations worldwide. In this guide, we will walk you through the process of installing Ubuntu Server 24.04, however the steps are be similar for other versions of Ubuntu Server.
+
+## Prerequisites
+
+- A system with a minimum of 2 GHz dual-core processor, 1024 GB of RAM, and 5 GB of free disk space. [System Specs](https://ubuntu.com/server/docs/system-requirements)
+- A bootable USB drive with Ubuntu Server 24.04 ISO image. You can download the official ubuntu server ISO [here](https://ubuntu.com/download/server). If you are unsure how to create a bootable USB drive, you can follow our guide on [creating a bootable USB drive using Rufus](/bootable-usb-drive/creating-a-bootable-usb-drive-using-rufus) or [creating a bootable USB drive using Ventoy](/bootable-usb-drive/creating-a-bootable-usb-drive-using-ventoy).
+
+<Callout type="info">
+This guide will show you how to install Ubuntu Server 24.04 on [Proxmox VE](/proxmox/introduction-to-proxmox).
+
+The steps are similar for a bare-metal installation.
+
+</Callout>
+
+## Step-by-Step Guide
+
+### Boot from your USB drive
+
+If you are installing Ubuntu Server on a physical machine, insert the bootable USB drive into the USB port of your system. If you are installing Ubuntu Server on a virtual machine, attach the Ubuntu Server ISO image to the virtual machine.
+
+- Power on your system and press the appropriate key to access the boot menu. THe key to access the boot menu varies depending on the manufacturer of your system. Common keys include `F2`, `F12`, `ESC`, or `DEL`. For more details, on how to boot from a USB drive, please refer to our guides on bootable USB drives, listed in the [prerequisites section](#prerequisites).
+
+### Install Ubuntu Server
+
+<Callout type="info">
+Since this gudies covers installing Ubuntu Server on Proxmox VE, we will be using a virtual machine.
+
+Follow the [Proxmox VE guide](/proxmox/proxmox-setup-guide#step-6-create-virtual-machines-and-containers) to create a new virtual machine.
+
+</Callout>
+
+1. Power on the virtual machine and select `Try or Install Ubuntu Server` from the boot menu.
+
+2. Select your preferred language and press `Enter`.
+
+3. Select your preferred keyboard layout and press `Enter`.
+
+4. On the `Choose the base for the installation` screen, select `Ubuntu Server` and press `Ender`.
+
+5. If you wish to configure a static IP address, which is highly recommended for servers, use the arrow keys or tab to navigate to the interface you wish to configure. The interface name will be displayed in the format `enp0s3` or `ens3`. Select the interface and press `Enter`, from there select `Edit IPv4` and press `Enter` one more time.
+
+   - From the dropdown menu, select `Maual`. Enter the IP address, subnet mask, gateway, and Name servers. Once you have entered the required information, use your arrow keys or tab to select `Save` at the bottom of the windows and press `Enter`. Next, select `Done` and press `Ender`.
+
+<Callout type="default">
+Subnet: 192.168.0.0/24
+
+IP address: 192.168.0.200
+
+Gateway: 192.168.0.1
+
+Name servers: 192.168.0.1
+
+</Callout>
+
+6. This guide will not cover proxy configuration, or archive mirror configuration therefore, on this and the next page, select `Done` and press `Ender`.
+
+7. On the `Guideed storage configuration` screen, leave the default option `Use an entire disk` selected. If you have multiple disks, you can select the disk you wish to use for the installation, from the dropdown menu. Once you have selected the disk, select `Done` and press `Enter`.
+
+8. The `Storage configuration` screen will display a summary of the changes that will be made to the disk. For more advanced storage configurations, please
+   [refer to the official Ubuntu Server documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/configure-storage.html). Select `Done` and press `Enter`. Next, select `Continue` and press `Enter`.
+
+9. On the `Profile configuration` screen, enter your name, server name, username, and password. These details will be used to create the first user account on the system. Once you have entered the required information, select `Done` and press `Enter`.
+
+10. Skip the `Upgrade to Ubuntu Pro` screen. Select `Done` and press `Enter`.
+
+11. If you wish to use the OpenSSH server, select `Install OpenSSH server` using you spacebar. You may also import SSH keys from GitHub or Launchpad. Once you have made your selection, select `Done` and press `Enter`.
+
+12. On the `Featured server snaps` screen, you can select additional snaps to install. We will not be selecting any additional snaps for this guide. Select `Done` and press `Enter`.
+
+13. The system will now begin installing. Once the installation is complete, select `Reboot Now` and press `Enter`. The system will reboot.
+
+<Callout type="warning">
+  You need to removed the installation media, for the system to boot from the
+  disk you installed Ubuntu Server on.
+</Callout>
+
+<Callout type="info">
+  If you are using a virtual machine, you can remove the ISO image from the
+  virtual machine Hardware settings.
+</Callout>
+
+14. Once the system has rebooted, you will be prompted to log in. Enter the username and password you created during the installation process.
+
+## Conclusion
+
+Congratulations! You have successfully installed Ubuntu Server 24.04. You can now log in to your server using the username and password you created during the installation process. If you have any questions or need further assistance, please refer to the official [Ubuntu Server documentation](https://ubuntu.com/server/docs). You may also want to check out our guide on [Adding or Modifying list of NTP Servers](./Add-or-modify-ntp-srv) or [Modifying Sudoers](./getting-sudo-rights)
+
+Select `Done` and press `Enter`. :)

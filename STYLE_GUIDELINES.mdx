@@ -1,0 +1,133 @@
+# Style Guidelines
+
+<Callout type="info">
+  For more detaile examples for any of the components listed below, please refer
+  to the [Styling Guide](https://docs.famlam.ca/styling-guide).
+</Callout>
+
+## Introduction
+
+- Keep the introduction concise and welcoming, providing a brief overview of
+  what the guide covers.
+
+## Prerequisites
+
+- List prerequisites in bullet points for clarity.
+- Include relevant links for downloading necessary files or resources.
+
+## Step-by-Step Guide
+
+### Step Structure
+
+1. Each step should be numbered for easy reference.
+2. Use bold or emphasized text for important instructions.
+3. Provide clear and detailed explanations for each step.
+
+### Code Blocks
+
+- Use code blocks for commands or code snippets.
+- Ensure commands are formatted properly.
+- Use the `copy` property, as shown in the example, to allow for easy
+  copy-pasting.
+
+````markdown copy
+```js copy
+code snippets
+```
+````
+
+Result:
+
+```js copy
+code snippets
+```
+
+### Notes and Tips
+
+- Use callout boxes or bolded text for notes and tips.
+- Clearly distinguish between notes, tips, and warnings.
+
+```markdown copy
+> 👍 Callout
+>
+> This is a callout. It's a great place to highlight some important information.
+```
+
+or
+
+    ```tsx copy
+    import { Callout } from "nextra/components"
+
+    <Callout type="default">
+      This is a callout. It's a great place to highlight some important information.
+    </Callout>
+    ```
+
+import { Callout } from "nextra/components"
+
+Result:
+
+> 👍 Callout
+>
+> This is a callout. It's a great place to highlight some important information.
+
+or
+
+<Callout type="default">
+  This is a callout. It's a great place to highlight some important information.
+</Callout>
+
+You can even use the `type` property to change the appearance of the callout:
+
+The following types are available: `default`, `info`, `warning`, `error` as
+shown below:
+
+<Callout type="default">
+  This is a callout. It's a great place to highlight some important information.
+</Callout>
+
+<Callout type="info">
+  This is a callout. It's a great place to highlight some important information.
+</Callout>
+
+<Callout type="warning">
+  This is a callout. It's a great place to highlight some important information.
+</Callout>
+
+<Callout type="error">
+  This is a callout. It's a great place to highlight some important information.
+</Callout>
+
+### Links
+
+- Use inline links for web addresses or references.
+- Ensure links are working and relevant to the content.
+
+```markdown copy
+[display text](link)
+```
+
+Result:
+
+[display text](link)
+
+## Conclusion
+
+- Summarize key points covered in the guide.
+- Provide encouragement or suggestions for further exploration.
+- Include contact information or support links for assistance.
+
+## Formatting
+
+- Use headings and subheadings for hierarchy and organization.
+- Maintain consistent formatting throughout the document.
+- Check for spelling and grammatical errors.
+
+## Other
+
+You may add any other sections as needed for your specific use case, as long as
+they follow the general guidelines outlined above. This style guide is meant to
+provide a framework for creating clear, consistent, and user-friendly
+documentation. Feel free to customize it to suit your needs and preferences.
+
+Happy documenting!

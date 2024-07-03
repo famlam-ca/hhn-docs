@@ -1,5 +1,65 @@
 # Changelog
 
+## 1.0.6 Changelog
+
+**New Guides**
+
+- Pterodactyl Panel Installation
+- Pterodactyl Webserver Config
+- Pterodactyl Wings Installation
+- Pterodactyl Example .env
+- Nginx Proxy Manager Installation and Configuration
+- Ubuntu Server Installation
+
+**Untracked**
+
+- Created `_meta.json` inside `server-hosting` directory
+- Created `_meta.json` inside `pterodactyl` directory
+- Added `prettier` and `prettier-plugin-tailwindcss` to devDependencies
+- Added `prettier.config.js`
+
+**Modified**
+
+- `theme.config.tsx`
+  - Added metadata (WIP)
+  - Updated repo base url
+  - Updated logo
+  - Updated footer
+- Updated `favicon.ico`
+- Added `favicon.png`
+- Renamed `STYLE_GUIDELINES.md` to `STYLE_GUIDELINES.mdx`
+- Updated `STYLE_GUIDELINES`
+  - `STYLE_GUIDELINES` - callout boxes should use `<Callout>`
+  - Added more examples
+- Added HHN colors to `tailwind.config.js` and `globals.css`
+- Added `prettier.config.js`
+- Added custom `blockquote` classes to `globals.css`
+- Added `server-hosting` directory
+- Updated Key Sections links in `index.mdx`
+- Moved Contributor guide out of its folder
+- Changed most `>` callouts to the custom `<blockquote>` with colors.
+- Removed `>` from infront of `**_NOTE:_**`
+- Renamed `next.config.mjs`
+- Renamed `_app.tsx` to `_app.mdx`
+- Updated root `_meta.json`
+- Added custom 404 page
+- Updated `index.mdx` links
+
+**Removed**
+
+- `proxmox.mdx`
+- `truenas.mdx`
+- Contributor `_meta.json`
+- `EditLink` component
+- Removed `banner` from `theme.config.tsx`
+
+**Bug fixes**
+
+- Tailwind CSS styles now apply
+
+**Full Changelog**:
+[1.0.5...1.0.6](https://github.com/famlam-ca/hhn-documentation/compare/1.0.5...1.0.6)
+
 ## 1.0.5 Changelog
 
 **Modified**
@@ -11,7 +71,8 @@
 
 - Installing WSL 2 with Ubuntu
 
-**Full Changelog**: [1.0.4...1.0.5](https://github.com/famlam-ca/hhn-documentation/compare/1.0.4...1.0.5)
+**Full Changelog**:
+[1.0.4...1.0.5](https://github.com/famlam-ca/hhn-documentation/compare/1.0.4...1.0.5)
 
 ## 1.0.4 Changelog
 
@@ -23,7 +84,8 @@
 
 - Become a Contributor link did not redirect correctly
 
-**Full Changelog**: [1.0.3...1.0.4](https://github.com/famlam-ca/hhn-documentation/compare/1.0.3...1.0.4)
+**Full Changelog**:
+[1.0.3...1.0.4](https://github.com/famlam-ca/hhn-documentation/compare/1.0.3...1.0.4)
 
 ## 1.0.3 Changelog
 
@@ -39,13 +101,16 @@
 
 ### What's Changed
 
-- First Merge of Docker stuff by @DesPartedNecturm in https://github.com/famlam-ca/hhn-documentation/pull/2
+- First Merge of Docker stuff by @DesPartedNecturm in
+  https://github.com/famlam-ca/hhn-documentation/pull/2
 
 ### New Contributors
 
-- @DesPartedNecturm made their first contribution in https://github.com/famlam-ca/hhn-documentation/pull/2
+- @DesPartedNecturm made their first contribution in
+  https://github.com/famlam-ca/hhn-documentation/pull/2
 
-**Full Changelog**: [1.0.2...1.0.3](https://github.com/famlam-ca/hhn-documentation/compare/1.0.2...1.0.3)
+**Full Changelog**:
+[1.0.2...1.0.3](https://github.com/famlam-ca/hhn-documentation/compare/1.0.2...1.0.3)
 
 ## 1.0.2 Changelog
 
@@ -68,7 +133,8 @@
 - Removed `gitTimestamp: true`
 - Corrected typo: changed `quests` to `guests` in Proxmox setup guide
 
-**Full Changelog**: [1.0.1...1.0.2](https://github.com/famlam-ca/hhn-documentation/compare/1.0.1...1.0.2)
+**Full Changelog**:
+[1.0.1...1.0.2](https://github.com/famlam-ca/hhn-documentation/compare/1.0.1...1.0.2)
 
 ## 1.0.1 Changelog
 
@@ -84,9 +150,11 @@
 
 **Bug Fixes**
 
-- Fixed issue with "Edit this page on GitHub" link not redirecting to the correct GitHub URL.
+- Fixed issue with "Edit this page on GitHub" link not redirecting to the
+  correct GitHub URL.
 
-**Full Changelog**: [1.0.0...1.0.1](https://github.com/famlam-ca/hhn-documentation/compare/1.0.0...1.0.1)
+**Full Changelog**:
+[1.0.0...1.0.1](https://github.com/famlam-ca/hhn-documentation/compare/1.0.0...1.0.1)
 
 ## 1.0.0 Changelog
 
@@ -103,4 +171,5 @@ Initial Commit
 - Clustering Proxmox with Three Nodes
 - TrueNAS Scale Setup Guide on Proxmox
 
-**Full Changelog**: [1.0.0](https://github.com/famlam-ca/hhn-documentation/commits/1.0.0)
+**Full Changelog**:
+[1.0.0](https://github.com/famlam-ca/hhn-documentation/commits/1.0.0)

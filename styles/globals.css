@@ -1,0 +1,133 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --background: 240, 20%, 97%;
+    --foreground: 180, 100%, 99%;
+
+    --card: 0, 0%, 100%;
+    --card-foreground: 240, 10%, 3%;
+
+    --popover: 0, 0%, 100%;
+    --popover-foreground: 240, 10%, 4%;
+
+    --primary: 204, 100%, 45%;
+    --primary-foreground: 213, 52%, 26%;
+
+    --secondary: 240, 5%, 96%;
+    --secondary-foreground: 240, 6%, 10%;
+
+    --text: 231, 15%, 25%;
+    --text-foreground: 233, 80%, 96%;
+
+    --muted: 213, 16%, 56%;
+    --muted-foreground: 240, 4%, 46%;
+
+    --accent: 240, 4.8%, 96%;
+    --accent-foreground: 240, 6%, 10%;
+
+    --destructive: 0, 86%, 97%;
+    --destructive-foreground: 0, 74%, 42%;
+
+    --alert: 355, 100%, 73%;
+    --alert-foreground: 355, 100%, 73%;
+
+    --success: 160, 86%, 60%;
+    --success-foreground: 160, 86%, 60%;
+
+    --warning: 36, 100%, 67%;
+    --warning-foreground: 36, 100%, 67%;
+
+    --border: 240, 6%, 90%;
+
+    --input: 240, 6%, 90%;
+
+    --ring: 240, 6%, 10%;
+
+    --radius: 0.5rem;
+
+    --border-blockquote: 217, 19%, 27%;
+  }
+
+  .dark {
+    --background: 210, 8%, 5%;
+    --foreground: 200, 6%, 10%;
+
+    --card: 240, 10%, 4%;
+    --card-foreground: 0, 0%, 98%;
+
+    --popover: 240, 10%, 4%;
+    --popover-foreground: 0, 0%, 98%;
+
+    --primary: 204, 100%, 45%;
+    --primary-foreground: 213, 52%, 26%;
+
+    --secondary: 240, 4%, 16%;
+    --secondary-foreground: 0, 0%, 98%;
+
+    --text: 233, 80%, 96%;
+    --text-foreground: 231, 15%, 25%;
+
+    --muted: 213 16% 56%;
+    --muted-foreground: 240, 5%, 65%;
+
+    --accent: 240, 4%, 16%;
+    --accent-foreground: 0, 0%, 98%;
+
+    --destructive: 0, 10%, 5%;
+    --destructive-foreground: 0, 74%, 42%;
+
+    --alert: 355, 100%, 73%;
+    --alert-foreground: 355, 100%, 73%;
+
+    --success: 160, 86%, 60%;
+    --success-foreground: 160, 86%, 60%;
+
+    --warning: 36, 100%, 67%;
+    --warning-foreground: 36, 100%, 67%;
+
+    --border: 240, 4%, 16%;
+
+    --input: 240, 4%, 16%;
+
+    --ring: 240, 5%, 84%;
+
+    --radius: 0.5rem;
+
+    --border-blockquote: 217, 19%, 27%;
+  }
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+blockquote {
+  margin-top: 1.5rem !important;
+  padding-left: 25px;
+  font-style: italic;
+  color: hsl(var(--text), 0.6);
+  border-left: 2px solid hsl(var(--border-blockquote));
+}
+
+blockquote.info {
+  background-color: hsl(var(--primary), 0.02);
+  border-left: 2px solid hsl(var(--primary));
+}
+
+blockquote.example {
+  background-color: hsla(var(--success), 0.02);
+  border-left: 2px solid hsl(var(--success));
+}
+
+blockquote.warning {
+  background-color: hsla(var(--warning), 0.02);
+  border-left: 2px solid hsl(var(--warning));
+}
+
+blockquote.error {
+  background-color: hsla(var(--alert), 0.02);
+  border-left: 2px solid hsl(var(--alert));
+}

@@ -1,0 +1,123 @@
+import { Callout } from "nextra/components"
+
+# Styling Guide
+
+<Callout type="info">
+  For more information on how to style your markdown in Nextra, please refer to
+  the official [Nextra docs](https://nextra.site/docs/guide/markdown)
+</Callout>
+
+## Blockquote
+
+Blockquotes can be styled by adding a class to the `blockquote` element.
+
+```md copy filename="Blockquote example 1"
+> Your text here
+```
+
+> \>
+
+```md copy filename="Blockquote example 2"
+<blockquote className="info">
+    Your text here
+</blockquote>
+```
+
+<blockquote>className=""</blockquote>
+<blockquote className="info">className="info"</blockquote>
+<blockquote className="example">className="example"</blockquote>
+<blockquote className="warning">className="warning"</blockquote>
+<blockquote className="error">className="error"</blockquote>
+
+## Callout
+
+Calloutes can be styled by adding a type to the `Callout` element. To use the
+`Callout` component you must first import it from `nextra/components`.
+
+```mdx copy filename="Callout example"
+import { Callout } from "nextra/components"
+
+<Callout type="default">Your text here</Callout>
+```
+
+<Callout type="default">type="default"</Callout>
+<Callout type="info">type="info"</Callout>
+<Callout type="warning">type="warning"</Callout>
+<Callout type="error">type="error"</Callout>
+
+## Code
+
+All code blocks should be wrapped in triple backticks, as well as contain the
+`copy` class, and optional filename.
+
+````mdx copy filename="Markdown"
+```mdx copy filename="<filename>"
+This is a code block
+```
+````
+
+Code blocks can also be syntax highlighted by specifying the language after the
+first set of backticks.
+
+````mdx copy /const/ filename="Markdown"
+```js /const/
+const foo = "bar"
+```
+````
+
+Substring and line highlighting is possible by specifying them after the
+language.
+
+````mdx filename="Markdown" {2,5-6}
+```js {1,4-5}
+import { useState } from "react"
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+## Images
+
+```mdx filename="Markdown"
+import Image from "next/image"
+
+<Image src="/demo.png" alt="Hello" width={500} height={500} />
+```
+
+We recommend using static image imports using Markdown. Nextra will
+automatically optimize the images for you.
+
+```mdx filename="Markdown"
+![demo](/demo.png)
+```
+
+<Callout type="default">
+  The above code will load the image from the `public` directory. If you want to
+  load an image from a different directory, you can use the reative path to the
+  image.
+</Callout>
+
+```mdx filename="Markdown"
+![demo](../somewhere/demo.png)
+```
+
+Result:
+
+![hhn docs](/hhn-docs.png)
+
+## Custom CSS
+
+We already support tailwind CSS out of the box. If you want to add your own
+custom CSS classes, you can do so by adding them to the `globals.css` file,
+inside the `styles` directory.
+
+```css filename="styles/globals.css"
+.custom-class {
+  color: red;
+}
+```
+
+More coming soon...

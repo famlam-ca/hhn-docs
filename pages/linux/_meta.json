@@ -1,4 +1,5 @@
 {
-    "Add-or-modify-ntp-srv": "Adding or Modifying NTP Sources",
-    "getting-sudo-rights": "Modifying Sudoers"
+  "installing-ubuntu-server-24-04": "Ubuntu Server Installation",
+  "Add-or-modify-ntp-srv": "Adding or Modifying NTP Sources",
+  "getting-sudo-rights": "Modifying Sudoers"
 }

@@ -6,14 +6,14 @@ Before you start contributing, please take a moment to review our guidelines to 
 
 ## Code of Conduct
 
-Please read and adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md) to ensure a friendly and inclusive community.
+Please read and adhere to our [Code of Conduct](./CODE_OF_CONDUCT) to ensure a friendly and inclusive community.
 
 ## Contributor Guidelines
 
 - **Accuracy**: Ensure that all information provided is accurate and up-to-date.
 - **Clarity**: Write in clear and understandable language, avoiding unnecessary jargon or technical terms when possible.
 - **Completeness**: Cover all relevant aspects of the topic being discussed, providing comprehensive guidance to readers.
-- **Formatting**: Follow the established [Style Guidelines](./STYLE_GUIDELINES.md) to maintain consistency across the documentation.
+- **Formatting**: Follow the established [Style Guidelines](./STYLE_GUIDELINES.mdx) to maintain consistency across the documentation.
 
 ### How to Contribute
 

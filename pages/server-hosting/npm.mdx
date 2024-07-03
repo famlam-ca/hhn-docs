@@ -1,0 +1,150 @@
+import { Callout } from "nextra/components"
+
+# Nginx Proxy Manager
+
+## Introduction
+
+[Nginx Proxy Manager](https://nginxproxymanager.com/) is a powerful tool that allows you to manage Nginx configurations through a web interface. This guide will walk you through installing NPM on proxmox and setting up a reverse proxy to route traffic to your applications via Cloudflare. By following these steps, you'll be able to manage your Nginx configurations with ease and securely host multiple applications on your server. Let's get started!
+
+For more detailed information and official documentation, you can visit the [Nginx Proxy Manager documentation](https://nginxproxymanager.com/guide/) or the [Proxmox VE Helper-Scripts documentation](https://tteck.github.io/Proxmox/#nginx-proxy-manager-lxc).
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- A Proxmox server with root access. To set up a Proxmox server, you can follow the [Proxmox VE Installation Guide](/proxmox/introduction-to-proxmox).
+- Cloudflare account with your domain added. [Cloudflare](https://dash.cloudflare.com/sign-up).
+- A domain name pointed to your Proxmox server's IP address. [Cloudflare Registrar](https://www.cloudflare.com/products/registrar)
+
+## Step-by-Step Guide
+
+### Install Nginx Proxy Manager
+
+Open a new terminal on your Proxmox server and run the following command to install Nginx Proxy Manager, using Proxmox VE Helper-Scripts:
+
+Follow the instructions on the screen to complete the installation.
+
+<Callout type="info">
+  We recommend using the default settings for the installation process.
+
+However, advanced users can customize the installation by choosing the advanced installation option.
+
+</Callout>
+
+<blockquote className="info">
+  ⚡ Default Settings: 1GB RAM - 3GB Storage - 1vCPU ⚡
+</blockquote>
+
+```sh copy
+bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/main/ct/nginxproxymanager.sh)"
+```
+
+<Callout type="warning">
+You MUST forward ports 80 and 443 from your router to your Nginx Proxy Manager IP address.
+
+This is required for the SSL certificate to be issued by Let's Encrypt, and to route traffic to your applications.
+
+</Callout>
+
+To access the NPM web interface from your browser, navigate to `http://<your-npm-server-ip>:81`.
+
+The default login credentials are:
+
+- **Username:** `admin@example.com`
+- **Password:** `changeme`
+
+<Callout type="info">
+  After logging in, you will be prompted to change your password. We also
+  recommend changing the default email address to your own.
+</Callout>
+
+### Configure Cloudflare DNS
+
+Once you have registered your domain with Cloudflare, you need to configure your DNS settings to route traffic to your NPM server.
+
+Head over to your [Cloudflare dashboard](https://dash.cloudflare.com/), select your domain, and navigate to the DNS tab on the left. From here click on the `Add Record` button and create an `A` record with the following details:
+
+<Callout type="info">
+  This record will be the root record for your domain.
+</Callout>
+
+- **Name:** For the root domain, enter `@`
+- **IPv4 Address:** Enter your Public IP address, which you can find [here](https://www.whatismyip.com/).
+- **Proxy Status:** Leave the Proxy status as `Proxied`.
+- **TTL:** Maybe also be left as `Auto`.
+- You may want to add a comment for future reference.
+
+Click on the `Save` button to create the record.
+
+#### Add NPM Subdomain
+
+<Callout type="warning">
+  We DO NOT recommend using a public subdomain for Nginx Proxy Manager.
+</Callout>
+
+To create a subdomain for Nginx Proxy Manager, click on the `Add Record` button. In the Type dropdown, select `CNAME` and enter the following details:
+
+- **Name:** Enter a subdomain name, such as `npm` or `proxy`.
+- **Target:** Enter your domain name, e.g., `example.com` or simply enter `@`.
+- **Proxy Status:** Leave the Proxy status as `Proxied`.
+- **TTL:** Maybe also be left as `Auto`.
+- You may want to add a comment for future reference.
+
+Click on the `Save` button to create the record.
+
+<Callout type="info">
+  This will point your subdomain to your Public IP address of your router, which
+  will then forward the traffic to your NPM server, via the ports your have
+  forwarded, in [this step](#install-nginx-proxy-manager) of the guide.
+</Callout>
+
+#### Create Cloudflare API Token
+
+You can find this in your Cloudflare account under `My Profile` > `API Tokens`. Click on the `Create Token` button and select the `Edit zone DNS` template for the token.
+
+Ensure it has the following details:
+
+- **Token name:** Enter a name for the token.
+- **Permissions** Click `+ Add more` and select the following permissions:
+  - Zone - DNS - Edit
+  - Zone - Zone - Read
+- **Zone Resources** Select the domain you wish to use for the token.
+
+Click `Continue to Summary` and then `Create Token`. Copy the token and save it in a secure location.
+
+### Configure Nginx Proxy Manager
+
+Next, log back into your Nginx Proxy Manager web interface and navigate to the `Proxy Hosts` tab. Click on the `Add Proxy Host` button to create a new host.
+
+<Callout type="default">
+We will now create a host for your [Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
+
+However, you can use this process to create hosts for any application you wish to route traffic to.
+
+</Callout>
+
+Fill in the following details:
+
+- **Domain Names:** Enter the subdomain you wish to use for the Pterodactyl guide, e.g., `panel.example.com`.
+- **Scheme:** Select `https`.
+- **Forward Hostname/IP:** Enter the IP address of your Pterodactyl Panel server. (NOT the Wings server)
+- **Forward Port:** Enter the port your Pterodactyl Panel is running on, e.g., `80` by default.
+- **Block Common Exploits:** Enable this option if you plan to share the domain publicly.
+- **Websockets Support:** Enable this option, since Pterodactyl uses Websockets.
+- Leave the rest of the settings as default.
+
+Next, click on the `SSL` tab and from the SSL Certificate dropdown, select `Request a new SSL Certificate`. This will automatically request a new SSL certificate from Let's Encrypt for your domain.
+
+Toggle the `Use a DNS Challenge` option, and fill in the following details:
+
+- **DNS Provider:** Select `Cloudflare`.
+- **Credentials File Content:** Set the `dns_cloudflare_api_token` to your Cloudflare API token. [How to get your Cloudflare API token](#create-cloudflare-api-token).
+- **Email Address for Let's Encrypt:** Enter your email address.
+
+Toggle the `I Agree to the Let's Encrypt Terms of Serivce` option and click `Save`.
+
+## Conclusion
+
+That's it! You have successfully set up Nginx Proxy Manager on your Proxmox server and configured a proxy host. You can now securely access your host by navigating to the proxy host domain name, e.g., `https://panel.example.com`.
+
+Happy Hosting!

@@ -1,0 +1,138 @@
+import { Callout, Table } from "nextra/components"
+
+# Webserver Configuration
+
+<Callout type="warning">
+ If you intend to use SSL configuration, you MUST create SSL certificates for your webserver to start. This guide will NOT cover that step; instead, we will use the NPM reverse network proxy.
+
+To create SSL certificates without NPM, refer to this official Pterodactyl [guide](https://pterodactyl.io/tutorials/creating_ssl_certificates.html).
+
+</Callout>
+
+## Introduction
+
+Setting up a web server to host applications such as the Pterodactyl Panel requires meticulous configuration for optimal performance and security. This guide will walk you through configuring NGINX, a robust web server, to effectively serve your Pterodactyl instance. By following these steps, you'll set up a virtual host, fine-tune server settings, and prepare your environment to host game servers and other applications seamlessly. Let's get started!
+
+For more detailed information and official documentation, you can visit the [Pterodactyl documentation](https://pterodactyl.io/panel/1.0/webserver_configuration.html#webserver-configuration).
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- Completed [Installing Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
+- Setup a reverse network proxy [NPM Guide](/server-hosting/npm).
+
+## Step-by-Step Guide
+
+### 1. Remove the Default NGINX Config
+
+We will not be using this file. However, if you have never used NGINX and would like to familiarize yourself, open the file first and read through the comments.
+
+```sh copy
+rm /etc/nginx/sites-enabled/default
+```
+
+### 2. Create a Virtual Host
+
+Create a new file in the same location as the previous default NGINX config file.
+
+<Callout type="info">
+  The official Pterodactyl docs recommend naming the file `pterodactyl.conf`,
+  but you may call it whatever you wish. The file name should reflect its
+  contents.
+</Callout>
+
+```sh copy
+# Not on CentOS
+nano /etc/nginx/sites-available/pterodactyl.conf
+```
+
+```sh copy
+# On CentOS
+nano /etc/nginx/conf.d/pterodactyl.conf
+```
+
+Copy and paste the following server block into the newly created file.
+
+<Callout type="warning">
+  Ensure you copy the contents in their entirety to avoid issues later.
+</Callout>
+
+<Callout type="default">
+ Replace the example `<domain>` with your domain name or IP address
+</Callout>
+
+```sh copy showLineNumbers {4}
+server {
+    # Replace the example <domain> with your domain name or IP address
+    listen 80;
+    server_name <domain>;
+
+
+    root /var/www/pterodactyl/public;
+    index index.html index.htm index.php;
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
+    error_log  /var/log/nginx/pterodactyl.app-error.log error;
+
+    # allow larger file uploads and longer script runtimes
+    client_max_body_size 100m;
+    client_body_timeout 120s;
+
+    sendfile off;
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+
+### 3. Enabling Configuration
+
+Enable your new NGINX config and restart the service.
+
+<Callout type="info">
+  You do not need to symlink this file if you are using CentOS.
+</Callout>
+
+```sh copy
+sudo ln -s /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/pterodactyl.conf
+```
+
+**_NOTE:_** To double-check whether you have correctly copied the server block, use this command before restarting the NGINX service: `nginx -t`
+
+<Callout type="default">You need to restart NGINX regardless of OS.</Callout>
+
+```sh copy
+sudo systemctl restart nginx
+```
+
+## Conclusion
+
+Well done! You have successfully completed the webserver configuration part of setting up the Pterodactyl Panel. The next step is to install and configure the Wings for the Panel.
+
+Happy Hosting!

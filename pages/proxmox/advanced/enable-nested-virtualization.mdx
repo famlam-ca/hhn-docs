@@ -1,6 +1,11 @@
+import { Callout } from "nextra/components"
+
 # Enable Nested Virtualization on Proxmox
 
-> VMs with nesting active (vmx/svm flag) cannot be live-migrated! To be done on the physical PVE host (or any other hypervisor).
+<Callout type="warning">
+  VMs with nesting active (vmx/svm flag) cannot be live-migrated! To be done on
+  the physical PVE host (or any other hypervisor).
+</Callout>
 
 To enable nested hardware-assisted virtualization:
 
@@ -49,7 +54,7 @@ cat /sys/module/kvm_intel/parameters/nested
 Y
 ```
 
-> **_Note:_** Pay attention to the use of dash "-" and underscore "\_" in the module names.
+**_Note:_** Pay attention to the use of dash "-" and underscore "\_" in the module names.
 
 ### Configure Virtual Machine
 
