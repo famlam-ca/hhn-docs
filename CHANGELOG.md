@@ -1,5 +1,44 @@
 # Changelog
 
+## 1.0.7 Changelog
+
+**New Guides**
+
+- `Introduction to Linux`
+
+**Untracked**
+
+- `introduction-to-linux.mdx`
+
+**Modified**
+
+- Root `_meta.json`: Renamed `dockerCLI` to docker
+- `dockerCLI/_meta.json`: moved to `docker/_meta.json`
+- Renamed `docker-installation-guide.mdx`
+- Renamed `introduction-to-docker.mdx`
+- Added docker intro to `docker/_meta.json`
+- `add-or-modify-ntp-srv.mdx`: Name, formatting and `# Notes` links
+- `getting-sudo-rights.mdx`: Formatting and `# Notes` links
+- `introduction-to-proxmox`: Formatting
+- `proxmox-setup-guide.mdx`: Formatting
+- `example-env.mdx`: Replaced `>` with `<Callout>`
+- `installing-pterodactyl-panel.mdx`: Formatting
+- `installing-pterodactyl-wings.mdx`: Formatting, Node creation steps, and other
+  minor tweaks.
+- `introduction-to-truenas.mdx`: Formatting
+
+**Removed**
+
+- `dockerswramguide.mdx`: Reason: Incomplete
+- `singlenodedockerguide.mdx` Reason: Incomplete
+
+**Bug fixes**
+
+- Several page links would not redirect correctly
+
+**Full Changelog**:
+[1.0.6...1.0.7](https://github.com/famlam-ca/hhn-documentation/compare/1.0.6...1.0.7)
+
 ## 1.0.6 Changelog
 
 **New Guides**

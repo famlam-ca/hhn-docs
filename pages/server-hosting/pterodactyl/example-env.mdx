@@ -1,3 +1,5 @@
+import { Callout } from "nextra/components"
+
 # Example Environment
 
 ## Base Env Setup
@@ -7,14 +9,17 @@ Egg Author Email [unknown@unknown.com]:
  > your@email.com
 ```
 
-> It is recommended to use an https connecion.
+<Callout type="info">It is recommended to use an https connecion.</Callout>
 
 ```sh
 Application URL [http://panel.example.com]:
  > https://panel.yourdomain.com
 ```
 
-> Reference this https://php.net/manual/en/timezones.php for your specific timezone.
+<Callout type="default">
+  Reference this https://php.net/manual/en/timezones.php for your specific
+  timezone.
+</Callout>
 
 ```sh
 Application Timezone [UTC]:
@@ -53,14 +58,22 @@ Enable sending anonymous telemetry data? (yes/no) [yes]:
 
 ## Database Env Setup
 
-> [NOTE] You've selected the Redis driver for one or more options, please provide valid connection information below. In most cases you can use the defaults provided unless you have modified your setup.
+<Callout type="warning">
+  [NOTE] You've selected the Redis driver for one or more options, please
+  provide valid connection information below. In most cases you can use the
+  defaults provided unless you have modified your setup.
+</Callout>
 
 ```sh
 Redis Host [127.0.0.1]:
  > 127.0.0.1
 ```
 
-> By default a Redis server instance has no password as it is running locally and inaccessible to the outside world. If this is the case, simply hit enter without entering a value.
+<Callout type="info">
+  By default a Redis server instance has no password as it is running locally
+  and inaccessible to the outside world. If this is the case, simply hit enter
+  without entering a value.
+</Callout>
 
 ```sh
 Redis Password:
@@ -72,14 +85,21 @@ Redis Port [6379]:
  > 6379
 ```
 
-> [NOTE] It is highly recommended to not use "localhost" as your database host as we have seen frequent socket connection issues. If you want to use a local connection you should be using "127.0.0.1".
+<Callout type="warning">
+  [NOTE] It is highly recommended to not use "localhost" as your database host
+  as we have seen frequent socket connection issues. If you want to use a local
+  connection you should be using "127.0.0.1".
+</Callout>
 
 ```sh
 Database Host [127.0.0.1]:
  > IP for you database server
 ```
 
-> Please reference your database management systems for specific port requirements.
+<Callout type="default">
+  Please reference your database management systems for specific port
+  requirements.
+</Callout>
 
 ```sh
 Database Port [3306]:
@@ -91,14 +111,21 @@ Database Name [panel]:
  > panel
 ```
 
-> [NOTE] Using the "root" account for MySQL connections is not only highly frowned upon, it is also not allowed by this application. You'll need to have created a MySQL user for this software.
+<Callout type="warning">
+  [NOTE] Using the "root" account for MySQL connections is not only highly
+  frowned upon, it is also not allowed by this application. You'll need to have
+  created a MySQL user for this software.
+</Callout>
 
 ```sh
 Database Username [pterodactyl]:
  > pterodactyl
 ```
 
-> This password should be password used in the database configuration [here](/server-hosting/pterodactyl/installing-pterodactyl-panel#1database-configuration).
+<Callout type="info">
+  This password should be password used in the database configuration
+  [here](/server-hosting/pterodactyl/installing-pterodactyl-panel#1database-configuration).
+</Callout>
 
 ```sh
 Database Password:
@@ -117,7 +144,9 @@ Which driver should be used for sending emails? [SMTP Server]:
  > smtp
 ```
 
-> You may use any smtp server you wish. In this example I am using sendgrid.
+<Callout type="info">
+  You may use any smtp server you wish. In this example I am using sendgrid.
+</Callout>
 
 ```sh
 SMTP Host (e.g. smtp.gmail.com) [smtp.sendgrid.net]:
@@ -178,7 +207,9 @@ Last Name:
  > your_last_name
 ```
 
-> Follow the required password policies on screen.
+<Callout type="default">
+  Follow the required password policies on screen.
+</Callout>
 
 ```sh
 Password:

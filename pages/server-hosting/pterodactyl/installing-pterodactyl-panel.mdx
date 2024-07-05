@@ -4,15 +4,22 @@ import { Callout } from "nextra/components"
 
 ## Introduction
 
-Pterodactyl is an open-source game server management panel built with PHP, React, and Go. It provides a robust platform for managing and deploying game servers with ease, offering features such as a user-friendly interface, support for various game servers, and secure and scalable architecture. This guide will walk you through the steps to install and set up the Pterodactyl Panel on your server, ensuring you have a solid foundation for managing your game servers.
+Pterodactyl is an open-source game server management panel built with PHP,
+React, and Go. It provides a robust platform for managing and deploying game
+servers with ease, offering features such as a user-friendly interface, support
+for various game servers, and secure and scalable architecture. This guide will
+walk you through the steps to install and set up the Pterodactyl Panel on your
+server, ensuring you have a solid foundation for managing your game servers.
 
-For more detailed information and official documentation, visit the [Pterodactyl documentation](https://pterodactyl.io/project/introduction.html).
+For more detailed information and official documentation, visit the
+[Pterodactyl documentation](https://pterodactyl.io/project/introduction.html).
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- Install a Linux OS [Ubuntu Installation Guide](/linux/installing-ubuntu-server-24-04).
+- Install a Linux OS
+  [Ubuntu Installation Guide](/linux/installing-ubuntu-server-24-04).
 - (Optional) Setup a reverse network proxy [NPM Guide](/server-hosting/npm).
 - Root access to your server is required to run and use the Pterodactyl Panel.
 
@@ -67,7 +74,8 @@ We will first begin by installing all of Pterodactyl's required dependencies.
 
 ### 2. Installing Composer
 
-Composer is required for dependency management in PHP. It will be used to ship all code needed to operate the panel.
+Composer is required for dependency management in PHP. It will be used to ship
+all code needed to operate the panel.
 
 ```sh copy
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
@@ -82,7 +90,8 @@ mkdir -p /var/www/pterodactyl
 cd /var/www/pterodactyl
 ```
 
-Once you've created the necessary directories for Pterodactyl, we can proceed to download the files.
+Once you've created the necessary directories for Pterodactyl, we can proceed to
+download the files.
 
 ```sh copy
 curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
@@ -99,7 +108,8 @@ Now that we have all the files needed, we can configure the base Panel.
 <Callout type="info">
 The following steps will show you how to configure a database on the Panel.
 
-Follow the same steps below, on a dedicated database server, and change the necessary DB\_\* environmental variables for a non-local database.
+Follow the same steps below, on a dedicated database server, and change the
+necessary DB\_\* environmental variables for a non-local database.
 
 </Callout>
 
@@ -117,7 +127,9 @@ GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;
 
 #### Creating a Database Host for Nodes
 
-**_NOTE:_** You should change the username and password below to something unique.
+<Callout type="warning">
+  You should change the username and password below to something unique.
+</Callout>
 
 ```sh copy
 CREATE USER 'pterodactyluser'@'127.0.0.1' IDENTIFIED BY 'somepassword';
@@ -145,7 +157,8 @@ php artisan key:generate --force
   complete.
 </Callout>
 
-Now we will populate the environmental variables inside `.env` via the following commands.
+Now we will populate the environmental variables inside `.env` via the following
+commands.
 
 <Callout type="info">
   Running the following commands will prompt you to answer several questions.
@@ -166,7 +179,8 @@ For a custom SMTP server, such as Gmail, select "smtp".
 
 </Callout>
 
-See reference [.env.example](/server-hosting/pterodactyl/example-env#mail-env-setup).
+See reference
+[.env.example](/server-hosting/pterodactyl/example-env#mail-env-setup).
 
 ```sh copy
 php artisan p:environment:mail
@@ -174,9 +188,13 @@ php artisan p:environment:mail
 
 #### Database Setup
 
-It is time to set up the database contents. The command below will create the database tables and all the base Nests and Eggs that come with Pterodactyl.
+It is time to set up the database contents. The command below will create the
+database tables and all the base Nests and Eggs that come with Pterodactyl.
 
-**_NOTE:_** The command may take several minutes to complete, depending on your machine.
+<Callout type="info">
+  The following command may take several minutes to complete, depending on your
+  machine. Please be patient.
+</Callout>
 
 <Callout type="error">
   Please DO NOT exit the process until it is completed.
@@ -188,7 +206,9 @@ php artisan migrate --seed --force
 
 #### Add The First User
 
-Someone has to manage the Panel. The command below will create the very first user. This user should be made an administrator of the Panel. See reference [.env.example](/server-hosting/pterodactyl/example-env#user-env-setup).
+Someone has to manage the Panel. The command below will create the very first
+user. This user should be made an administrator of the Panel. See reference
+[.env.example](/server-hosting/pterodactyl/example-env#user-env-setup).
 
 ```sh copy
 php artisan p:user:make
@@ -196,9 +216,11 @@ php artisan p:user:make
 
 #### Set Permissions
 
-The last step of the installation is to set the correct permissions on the Panel files.
+The last step of the installation is to set the correct permissions on the Panel
+files.
 
-The following commands will change the owner of all the files and directories inside the pterodactyl directory.
+The following commands will change the owner of all the files and directories
+inside the pterodactyl directory.
 
 <Callout type="default">
   Please read the command comments to find the command applicable to your
@@ -222,13 +244,19 @@ chown -R apache:apache /var/www/pterodactyl/*
 
 ### 5. Queue Listeners
 
-For a more detailed explanation of queue listeners and what they do, see the official [Pterodactyl documentation](https://pterodactyl.io/panel/1.0/getting_started.html#queue-listeners).
+For a more detailed explanation of queue listeners and what they do, see the
+official
+[Pterodactyl documentation](https://pterodactyl.io/panel/1.0/getting_started.html#queue-listeners).
 
 #### Crontab Configuration
 
-First, we need to edit crontab. For anyone who has never used crontab, crontab is a simple way to schedule tasks inside a Unix operating system. To edit crontab, run the following command.
+First, we need to edit crontab. For anyone who has never used crontab, crontab
+is a simple way to schedule tasks inside a Unix operating system. To edit
+crontab, run the following command.
 
-**_NOTE:_** You may be prompted to choose a text editor. The simplest way to edit a file such as crontab would be `nano` or `gedit`. However, experienced users are welcome to use `vi/vim`.
+**_NOTE:_** You may be prompted to choose a text editor. The simplest way to
+edit a file such as crontab would be `nano` or `gedit`. However, experienced
+users are welcome to use `vi/vim`.
 
 ```sh copy
 sudo crontab -e
@@ -243,15 +271,19 @@ Once inside crontab, append the following line at the bottom of the file.
 <Callout type="info">
 To save and exit nano, press `CTRL+S` and then `CTRL+X`.
 
-If you would like to view the contents of the crontab without opening the editor use `sudo crontab -l`
+If you would like to view the contents of the crontab without opening the editor
+use `sudo crontab -l`
 
 </Callout>
 
 #### Create Queue Worker
 
-Next, we will create a new systemd worker to keep the previous process running continuously in the background. For more information, please visit the official [Pterodactyl\***\* \*\***documentation](https://pterodactyl.io/panel/1.0/getting_started.html#create-queue-worker).
+Next, we will create a new systemd worker to keep the previous process running
+continuously in the background. For more information, please visit the official
+[Pterodactyl documentation](https://pterodactyl.io/panel/1.0/getting_started.html#create-queue-worker).
 
-First, create a file called `pteroq.service` under the directory `/etc/systemd/system` like so:
+First, create a file called `pteroq.service` under the directory
+`/etc/systemd/system` like so:
 
 ```sh copy
 sudo nano /etc/systemd/system/pteroq.service
@@ -282,7 +314,8 @@ RestartSec=5s
 WantedBy=multi-user.target
 ```
 
-Lastly, you need to enable and start the `redis-server` and the `pteroq.service` we just created.
+Lastly, you need to enable and start the `redis-server` and the `pteroq.service`
+we just created.
 
 ```sh copy
 sudo systemctl enable --now redis-server
@@ -291,13 +324,16 @@ sudo systemctl enable --now pteroq.service
 
 ## Conclusion
 
-Congratulations! You have completed the installation of the Pterodactyl Panel. You can now move on to configuring the webserver to access the Panel and start creating servers to play with friends.
+Congratulations! You have completed the installation of the Pterodactyl Panel.
+You can now move on to configuring the webserver to access the Panel and start
+creating servers to play with friends.
 
 Happy Hosting!
 
 ## Video Tutorial
 
-For a more visual guide, you can watch this video tutorial on how to install Pterodactyl Panel, using docker:
+For a more visual guide, you can watch this video tutorial on how to install
+Pterodactyl Panel, using docker:
 
 <div className="my-10">
   <iframe

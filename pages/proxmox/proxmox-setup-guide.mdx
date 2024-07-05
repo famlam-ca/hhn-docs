@@ -2,55 +2,86 @@
 
 ## Introduction
 
-Welcome to the Proxmox Setup Guide! This section will walk you through the process of setting up your Proxmox Virtual Environment (VE), from initial installation to basic configuration. Proxmox VE is an open-source server virtualization environment that allows you to manage virtual machines, containers, and storage solutions efficiently. Let's get started!
+Welcome to the Proxmox Setup Guide! This section will walk you through the
+process of setting up your Proxmox Virtual Environment (VE), from initial
+installation to basic configuration. Proxmox VE is an open-source server
+virtualization environment that allows you to manage virtual machines,
+containers, and storage solutions efficiently. Let's get started!
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- A dedicated server or a powerful workstation with at least 4GB of RAM (8GB or more recommended).
+- A dedicated server or a powerful workstation with at least 4GB of RAM (8GB or
+  more recommended).
 - A 64-bit processor with VT-x/AMD-V support.
 - A stable internet connection.
-- Proxmox VE ISO image, which can be downloaded from the [Proxmox download page](https://www.proxmox.com/en/downloads/proxmox-virtual-environment).
+- Proxmox VE ISO image, which can be downloaded from the
+  [Proxmox download page](https://www.proxmox.com/en/downloads/proxmox-virtual-environment).
 
 ## Step-by-Step Installation Guide
 
 ### Step 1: Prepare Your Installation Media
 
-1. **Download the Proxmox VE ISO**: Visit the [Proxmox download page](https://www.proxmox.com/en/downloads/proxmox-virtual-environment) and download the latest version of the Proxmox VE ISO.
-2. **Create a Bootable USB Drive**: Using [Rufus](https://rufus.ie). We have a guide that covers this setup, step-by-step [here](/create-a-bootable-USB-drive-using-rufus).
+1. **Download the Proxmox VE ISO**: Visit the
+   [Proxmox download page](https://www.proxmox.com/en/downloads/proxmox-virtual-environment)
+   and download the latest version of the Proxmox VE ISO.
+2. **Create a Bootable USB Drive**: Using [Rufus](https://rufus.ie). We have a
+   guide that covers this setup, step-by-step
+   [here](/bootable-usb-drive/creating-a-bootable-usb-drive-using-rufus).
 
 ### Step 2: Boot and Install Proxmox VE
 
-1. **Boot from the USB Drive**: Insert the bootable USB drive into your server and boot from it. You may need to adjust the BIOS/UEFI settings to prioritize USB boot.
-2. **Start the Installation**: Once booted, you'll see the Proxmox VE installer boot menu. Select "Install Proxmox VE" and press Enter. **(In this guide we will be using the graphical installer.)**
+1. **Boot from the USB Drive**: Insert the bootable USB drive into your server
+   and boot from it. You may need to adjust the BIOS/UEFI settings to prioritize
+   USB boot.
+2. **Start the Installation**: Once booted, you'll see the Proxmox VE installer
+   boot menu. Select "Install Proxmox VE" and press Enter. **(In this guide we
+   will be using the graphical installer.)**
 3. **Accept the EULA**: Read and accept the End User License Agreement (EULA).
-4. **Select the Target Hard Disk**: Choose the disk where you want to install Proxmox VE. Ensure this disk is empty or contains no important data, as it will be formatted.
-5. **Configure the Country, Time Zone, and Keyboard Layout**: Set your preferred country, time zone, and keyboard layout.
-6. **Set the Root Password and Email**: Create a strong password for the root account and provide an email address for system notifications.
-7. **Configure the Network**: Set up the hostname, IP address, netmask, gateway, and DNS server. Use a static IP address to avoid network issues later.
-8. **Finish the installation**: After completing all previous steps, click the **Install** button at the end of the installation wizard to install Proxmox VE.
+4. **Select the Target Hard Disk**: Choose the disk where you want to install
+   Proxmox VE. Ensure this disk is empty or contains no important data, as it
+   will be formatted.
+5. **Configure the Country, Time Zone, and Keyboard Layout**: Set your preferred
+   country, time zone, and keyboard layout.
+6. **Set the Root Password and Email**: Create a strong password for the root
+   account and provide an email address for system notifications.
+7. **Configure the Network**: Set up the hostname, IP address, netmask, gateway,
+   and DNS server. Use a static IP address to avoid network issues later.
+8. **Finish the installation**: After completing all previous steps, click the
+   **Install** button at the end of the installation wizard to install Proxmox
+   VE.
 
-**_NOTE:_** The hostname will be used to identify the node in a cluster, and should **NOT** be changed after creating guests or joining a cluster. To learn more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
+**_NOTE:_** The hostname will be used to identify the node in a cluster, and
+should **NOT** be changed after creating guests or joining a cluster. To learn
+more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
 
 ### Step 3: First Boot and Basic Configuration
 
-1. **Reboot the System**: Once the installation is complete, remove the USB drive and reboot your server.
-2. **Access the Web Interface**: Open a web browser on a device connected to the same network and navigate to `https://<your-server-ip>:8006`. Note that the connection uses HTTPS and may show a security warning, which you can bypass.
-3. **Login to Proxmox VE**: Use the root account and the password you set during installation to log in.
+1. **Reboot the System**: Once the installation is complete, remove the USB
+   drive and reboot your server.
+2. **Access the Web Interface**: Open a web browser on a device connected to the
+   same network and navigate to `https://<your-server-ip>:8006`. Note that the
+   connection uses HTTPS and may show a security warning, which you can bypass.
+3. **Login to Proxmox VE**: Use the root account and the password you set during
+   installation to log in.
 
 ### Step 4: Update Proxmox VE
 
-1. **Update Package Repository**: Open the shell, by navigating to \<NODE_NAME\> or SSH into your Proxmox server and run the following commands to update the package repository:
+1. **Update Package Repository**: Open the shell, by navigating to \<NODE_NAME\>
+   or SSH into your Proxmox server and run the following commands to update the
+   package repository:
 
-   **_NOTE_**: The NODE_NAME is located under `Datacenter` and is derived from the hostname set during installation.
+   **_NOTE_**: The NODE_NAME is located under `Datacenter` and is derived from
+   the hostname set during installation.
 
    ```bash copy
    apt update
    apt upgrade -y
    ```
 
-2. **Update Proxmox VE Packages**: Ensure all Proxmox VE packages are up to date:
+2. **Update Proxmox VE Packages**: Ensure all Proxmox VE packages are up to
+   date:
    ```bash copy
    pveupdate
    pveupgrade
@@ -58,21 +89,35 @@ Before you begin, ensure you have the following:
 
 ### Step 5: Configure Storage (Optional)
 
-1. **Add Local Storage**: Navigate to `Datacenter > Storage` in the web interface. Add a new local storage for ISO images, backups, and containers.
-2. **Add Network Storage**: If you have network-attached storage (NAS), you can add it under `Datacenter > Storage` by selecting the appropriate storage type (NFS, CIFS, etc.).
+1. **Add Local Storage**: Navigate to `Datacenter > Storage` in the web
+   interface. Add a new local storage for ISO images, backups, and containers.
+2. **Add Network Storage**: If you have network-attached storage (NAS), you can
+   add it under `Datacenter > Storage` by selecting the appropriate storage type
+   (NFS, CIFS, etc.).
 
 ### Step 6: Create Virtual Machines and Containers
 
-1. **Create a Virtual Machine (VM)**: Navigate to `Datacenter > Create VM`. Follow the wizard to configure the VM, including selecting an ISO image, setting disk size, memory, and CPU resources.
-2. **Create a Container (CT)**: Navigate to `Datacenter > Create CT`. Follow the wizard to configure the container, choosing the desired OS template and resource allocation.
+1. **Create a Virtual Machine (VM)**: Navigate to `Datacenter > Create VM`.
+   Follow the wizard to configure the VM, including selecting an ISO image,
+   setting disk size, memory, and CPU resources.
+2. **Create a Container (CT)**: Navigate to `Datacenter > Create CT`. Follow the
+   wizard to configure the container, choosing the desired OS template and
+   resource allocation.
 
 ### Step 7: Backup and Restore (Recommended)
 
-1. **Set Up Backup**: Configure backup jobs under `Datacenter > Backup` to automate backups of your VMs and containers.
-2. **Restore from Backup**: Use the Restore option under the Storage menu to restore VMs and containers from backup files.
+1. **Set Up Backup**: Configure backup jobs under `Datacenter > Backup` to
+   automate backups of your VMs and containers.
+2. **Restore from Backup**: Use the Restore option under the Storage menu to
+   restore VMs and containers from backup files.
 
 ## Conclusion
 
-Congratulations! You've successfully set up Proxmox VE and are ready to start creating and managing virtual machines and containers. For advanced configurations and optimizations, explore the other guides available in our Proxmox documentation. For any questions or further assistance, feel free to reach out to [support](https://www.famlam.ca/contact/support), or contact me directly [here](https://www.famlam.ca/contact).
+Congratulations! You've successfully set up Proxmox VE and are ready to start
+creating and managing virtual machines and containers. For advanced
+configurations and optimizations, explore the other guides available in our
+Proxmox documentation. For any questions or further assistance, feel free to
+reach out to [support](https://www.famlam.ca/contact/support), or contact me
+directly [here](https://www.famlam.ca/contact).
 
 Happy virtualizing!

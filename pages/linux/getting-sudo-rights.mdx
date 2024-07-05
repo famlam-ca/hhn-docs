@@ -2,7 +2,8 @@
 
 ## Summary
 
-Sudo allows a linux user to run commands as root temporarily. This guide will show you how to gain these for a user if they cannot sudo.
+Sudo allows a linux user to run commands as root temporarily. This guide will
+show you how to gain these for a user if they cannot sudo.
 
 ## Requirements
 
@@ -12,57 +13,77 @@ Sudo allows a linux user to run commands as root temporarily. This guide will sh
 
 ## Steps
 
-1. **Enter/Become Root**  
+1. **Enter/Become Root**
 
 ```bash copy
 su - root
-```  
-Enter your Root password when prompted.  
+```
 
-*This will create a root session and move you into root home directory<sup>1</sup>. The file you will edit requires Root access.<sup>2</sup>*
+Enter your Root password when prompted.
 
-2. **Edit the Sudoers File**  
+_This will create a root session and move you into root home
+directory<sup>[1](#notes)</sup>. The file you will edit requires Root
+access.<sup>[2](#notes)</sup>_
+
+2. **Edit the Sudoers File**
 
 ```bash copy
 vim /etc/sudoers
-```  
+```
 
-Use an editor<sup>3</sup> on the sudoers file<sup>4</sup>.  
+Use an editor<sup>[3](#notes)</sup> on the sudoers file<sup>[4](#notes)</sup>.
 
-*This file should be the same for most, if not all Linux Distributions.*
+_This file should be the same for most, if not all Linux Distributions._
 
-3. **Add or Modify Sudo Users**  
+3. **Add or Modify Sudo Users**
 
 Look for Line:  
 `## User privilege specification`  
-Under `root ALL=(ALL:ALL) ALL`, add your user.  
+Under `root ALL=(ALL:ALL) ALL`, add your user.
+
 ```bash copy
 `<user> ALL=(ALL:ALL) ALL`
-```  
-*Press `i` to be able to type in text.*  
-*Copying the existing format for Root, we are giving your user full sudo rights.<sup>5</sup>*  
+```
 
-4. **Save your Edits**  
+_Press `i` to be able to type in text._  
+_Copying the existing format for Root, we are giving your user full sudo
+rights.<sup>[5](#notes)</sup>_
 
-Press `Esc` then `:` then type `wq` then press `Enter`<sup>6</sup>  
+4. **Save your Edits**
 
-*This will save the file and exit you from vim.*  
+Press `Esc` then `:` then type `wq` then press `Enter`<sup>[6](#notes)</sup>
 
-**You have Finished**  
+_This will save the file and exit you from vim._
+
+**You have Finished**
 
 You may now exit back to your user.
 
-## Conclusion  
+## Conclusion
 
-You may now use sudo for any commands you want to run as root or are too lazy to get proper access in place for with user/s you have added to the sudoers list. Happy Linuxing!  
-*You will have to enter your user password to run a sudo'd command. It seems to have a "idle" period where you don't need to enter it for a while if you keep using sudo.*
-
+You may now use sudo for any commands you want to run as root or are too lazy to
+get proper access in place for with user/s you have added to the sudoers list.
+Happy Linuxing!  
+_You will have to enter your user password to run a sudo'd command. It seems to
+have a "idle" period where you don't need to enter it for a while if you keep
+using sudo._
 
 ## Notes
 
-1. `su - root` the `su` is actually somewhat related to sudo, and it has some other uses `man su`, here, we are using it in conjunction with `-`(`-l --login`) to login to root, we don't actually need `-` for this guide, as we aren't doing anything in root's home directory, so we could've used `su root` instead if we wanted. We could also omit `root` as `su` defaults to `root`.  
-2. If you don't: You'll get read access to sudoers, and you'll edit the file only to find out you can't save. And I'll just add that keeping the access/owner to the file/s unchanged is probably better than not.  
-3. The editor can be whatever you want, depending on what you like to use or what is installed. <sub>Nano can be popular.</sub>  
-4. If you already have sudo rights, you could just `sudo nano /etc/sudoers` directly.
-5. There's a lot more that can be done here, such as restricting what commands can be sudo'd, allowing sudo for groups, the file may tell you what you can do. Or just allow full access because why not.  
+1. `su - root` the `su` is actually somewhat related to sudo, and it has some
+   other uses `man su`, here, we are using it in conjunction with
+   `-`(`-l --login`) to login to root, we don't actually need `-` for this
+   guide, as we aren't doing anything in root's home directory, so we could've
+   used `su root` instead if we wanted. We could also omit `root` as `su`
+   defaults to `root`.
+2. If you don't: You'll get read access to sudoers, and you'll edit the file
+   only to find out you can't save. And I'll just add that keeping the
+   access/owner to the file/s unchanged is probably better than not.
+3. The editor can be whatever you want, depending on what you like to use or
+   what is installed. <sub>Nano can be popular.</sub>
+4. If you already have sudo rights, you could just `sudo nano /etc/sudoers`
+   directly.
+5. There's a lot more that can be done here, such as restricting what commands
+   can be sudo'd, allowing sudo for groups, the file may tell you what you can
+   do. Or just allow full access because why not.
 6. This will depend on your editer. `Ctrl-X` `Enter` `Enter` for Nano users.

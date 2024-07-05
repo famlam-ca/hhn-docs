@@ -9,14 +9,20 @@ import { Callout } from "nextra/components"
 
 ## Introduction
 
-Pterodactyl wings are a crucial component of the Pterodactyl control panel, which is a popular open-source game server management tool. These wings provide the necessary backend functionality to support the control panel's features and allow users to easily manage their game servers.
+Pterodactyl wings are a crucial component of the Pterodactyl control panel,
+which is a popular open-source game server management tool. These wings provide
+the necessary backend functionality to support the control panel's features and
+allow users to easily manage their game servers.
 
-For more detailed information and official documentation, visit the [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html).
+For more detailed information and official documentation, visit the
+[Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html).
 
 ## Prerequisites
 
-- Install a Linux OS [Ubuntu Installation Guide](guide_link).
-- Completed [Installing Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
+- Install a Linux OS
+  [Ubuntu Installation Guide](/linux/installing-ubuntu-server-24-04).
+- Completed
+  [Installing Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
 - Root access to your servers is required.
 
 ## Supported Systems
@@ -37,9 +43,12 @@ For more detailed information and official documentation, visit the [Pterodactyl
 
 Wings require a Linux system capable of running Docker containers.
 
-The easiest way to check if your machine is compatible is to type `systemd-detect-virt`. If the output does not contain OpenVZ or LXC, your machine should be compatible.
+The easiest way to check if your machine is compatible is to type
+`systemd-detect-virt`. If the output does not contain OpenVZ or LXC, your
+machine should be compatible.
 
-For more information, please visit the official [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#system-requirements).
+For more information, please visit the official
+[Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#system-requirements).
 
 ## Step-by-Step Guide
 
@@ -47,11 +56,17 @@ For more information, please visit the official [Pterodactyl documentation](http
 
 To install Docker using a one-liner, run the following command:
 
+<Callout type="default">
+  This command may take a while to complete, depending on your internet
+  connection and server speed.
+</Callout>
+
 ```sh copy
 curl -sSL https://get.docker.com/ | CHANNEL=stable bash
 ```
 
-If you prefer to manually install Docker, follow the official Docker documentation for your OS:
+If you prefer to manually install Docker, follow the official Docker
+documentation for your OS:
 
 - [Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-docker-ce)
 - [Debian](https://docs.docker.com/engine/install/debian/#install-docker-ce)
@@ -60,9 +75,13 @@ If you prefer to manually install Docker, follow the official Docker documentati
 <Callout type="default">
 Check your Kernel
 
-Some host providers may install modified versions of the Linux kernel, which might not support important Docker features. To check your kernel, run the command: `uname -r`. If your kernel is not supported, it will end in `-xxxx-grs-ipv6-64` or `-xxxx-mod-std-ipv6-64`.
+Some host providers may install modified versions of the Linux kernel, which
+might not support important Docker features. To check your kernel, run the
+command: `uname -r`. If your kernel is not supported, it will end in
+`-xxxx-grs-ipv6-64` or `-xxxx-mod-std-ipv6-64`.
 
-Check the official Pterodactyl guide for [Kernel Modifications](https://pterodactyl.io/daemon/0.6/kernel_modifications.html).
+Check the official Pterodactyl guide for
+[Kernel Modifications](https://pterodactyl.io/daemon/0.6/kernel_modifications.html).
 
 </Callout>
 
@@ -76,13 +95,19 @@ sudo systemctl enable --now docker
 
 **Enabling Swap**
 
-Docker may be unable to set up swap space on most systems. To confirm this, run `docker info` and look for a line that says `WARNING: No swap limit support` near the bottom of the output.
+Docker may be unable to set up swap space on most systems. To confirm this, run
+`docker info` and look for a line that says `WARNING: No swap limit support`
+near the bottom of the output.
 
-**_NOTE:_** Swap is not required but recommended by the Pterodactyl Team if you will be hosting for others.
+**_NOTE:_** Swap is not required but recommended by the Pterodactyl Team if you
+will be hosting for others.
 
-To enable swap, open `/etc/default/grub` as the root user and find the line starting with `GRUB_CMDLINE_LINUX_DEFAULT`. Edit the value of `swapaccount` to `1`, like so `swapaccount=1`.
+To enable swap, open `/etc/default/grub` as the root user and find the line
+starting with `GRUB_CMDLINE_LINUX_DEFAULT`. Edit the value of `swapaccount` to
+`1`, like so `swapaccount=1`.
 
-Next, run sudo `update-grub` and `sudo reboot` or `systemctl reboot` to restart the server and enable swap.
+Next, run sudo `update-grub` and `sudo reboot` or `systemctl reboot` to restart
+the server and enable swap.
 
 The following line is an example of what the line should look like:
 
@@ -93,13 +118,15 @@ GRUB_CMDLINE_LINUX_DEFAULT="swapaccount=1"
 <Callout type="info">
  GRUB Configuration
 
-Some Linux distros may ignore `GRUB_CMDLINE_LINUX_DEFAULT`. In this case, use `GRUB_CMDLINE_LINUX` instead.
+Some Linux distros may ignore `GRUB_CMDLINE_LINUX_DEFAULT`. In this case, use
+`GRUB_CMDLINE_LINUX` instead.
 
 </Callout>
 
 ### 3. Installing Wings
 
-Ensure you have the required directory structure. Create the following directory to ensure Wings works correctly:
+Ensure you have the required directory structure. Create the following directory
+to ensure Wings works correctly:
 
 ```sh copy
 sudo mkdir -p /etc/pterodactyl
@@ -110,7 +137,9 @@ sudo chmod u+x /usr/local/bin/wings
 <Callout type="warning">
  OVH/SYS Servers
 
-If your server provider is OVH or SoYouStart, note that your primary drive space might be allocated to `/home`, not `/` by default. In this case, consider using `/home/daemon-data` for server data.
+If your server provider is OVH or SoYouStart, note that your primary drive space
+might be allocated to `/home`, not `/` by default. In this case, consider using
+`/home/daemon-data` for server data.
 
 This can also be easily changed while creating the node.
 
@@ -118,22 +147,77 @@ This can also be easily changed while creating the node.
 
 ### 4. Configure
 
-Once the installation of Wings and the required components is complete, you can create a node on your previously installed Panel. Go to your Panel's `Administrative View`, select `Nodes` on the left, and click `Create New`.
-
-After creating a node, navigate to the `Configuration` tab. Copy the contents of the code block and paste it into a new file called `config.yml` in `/etc/pterodactyl`, then save it.
-
-An alternative and easier way is to click on the `Generate Token` button on the right of the screen and paste the command into your Panel's terminal.
+Once the installation of Wings and the required components is complete, you can
+create a node on your previously installed Panel. Go to your Panel's
+`Administrative View`, select `Nodes` on the left, and click `Create New`.
 
 <Callout type="warning">
   When using SSL on your Panel, you must also use SSL for your Wings. To create
-  a FQDN using NPM for your Wings, follow this [guide](guide_link).
+  a FQDN using [NPM](https://nginxproxymanager.com) for your Wings, follow this
+  [guide](/server-hosting/npm).
+
+**NOTE**: When creating a NPM host for your Wings, you must use http as the
+`Scheme` and port `443`, when using SSL a `FQDN`.
+
 </Callout>
+
+- Under the **Basic details** section, fill in the following fields:
+
+  - `Name`: Enter a name for your node. This can be anything you like.
+  - `Description`: Enter a description for your node. This can also be anything
+    you like.
+  - `Location`: This should reflect the physical location of your server, e.g.,
+    `ca.bc.local`.
+  - `FQDN`: Enter the Fully Qualified Domain Name of your server. This should be
+    the domain name that points to you server&apos;s IP address.
+  - `Communicate Over SSL`: When using a FQDN, this should be set to
+    `Use SSL Connection`. If you are using an IP address, this should be
+    disabled.
+  - `Behind Proxy`: If you are using a proxy, this should be set to
+    `Behind Proxy`, otherwise set it to `Not Behind Proxy`.
+
+- Moving to the right side under the **Configuration** section, fill in the
+  following fields:
+
+  - `Daemon Server File Directory`: Leave this as the default value, unless you
+    have a specific reason to change it.
+  - `Total Memory`: Enter the total amount of memory available on your server.
+  - `Memory Over-Allocation`: This is the amount of memory that can be
+    over-allocated to servers. If you wish to with to not allow over-allocation,
+    set the value to `0`. If you wish to not check for over-allocation, set the
+    value to `-1`, otherwise set it to the desired amount.
+  - `Total Disk Space`: Enter the total amount of disk space available on your
+    server.
+  - `Disk Over-Allocation`: The same as memory over-allocation, but for disk
+    space.
+  - `Daemon Port`: This is the port that Wings will use to communicate with the
+    Panel. For SSL connections, and when using a `FQDN`, use `443`. For non-SSL
+    connections, you may use the default value of `8080`.
+  - `Daemon SFTP Port`: This is the port that Wings will use for SFTP
+    connections. The default value is `2022`. We recommend using the default.
+
+<Callout type="info">
+  For more information on the configuration options, please read the notes on
+  the screen in the Panel.
+</Callout>
+
+After creating a node, navigate to the `Configuration` tab. Copy the contents of
+the code block and paste it into a new file called `config.yml` in
+`/etc/pterodactyl`, then save it.
+
+An alternative and easier way is to click on the `Generate Token` button on the
+right of the screen and paste the command into your Wings&apos; terminal.
 
 ### 5. Starting Wings
 
-To start Wings, run the following command. This command starts the Wings process in debug mode. Look through the logs and ensure there are no errors. Once you have confirmed that everything is running smoothly, exit the process using `CTRL+C`.
+To start Wings, run the following command. This command starts the Wings process
+in debug mode. Look through the logs and ensure there are no errors. Once you
+have confirmed that everything is running smoothly, exit the process using
+`CTRL+C`.
 
-**_NOTE:_** Your internet connection may cause the initial pull/start of Wings to be slow.
+<Callout type="default">
+  Your internet connection may cause the initial pull/start of Wings to be slow.
+</Callout>
 
 ```sh copy
 sudo wings --debug
@@ -146,9 +230,12 @@ sudo wings --debug
 
 ### 6. Daemonizing (using systemd)
 
-Much like the pteroq.service we created in this [guide](/server-hosting/pterodactyl/installing-pterodactyl-panel#2-create-queue-worker), we will create a service for Wings.
+Much like the pteroq.service we created in this
+[guide](/server-hosting/pterodactyl/installing-pterodactyl-panel#2-create-queue-worker),
+we will create a service for Wings.
 
-This is done to run the service in the background. First, create a file called `wings.service` in the `/etc/systemd/system` directory:
+This is done to run the service in the background. First, create a file called
+`wings.service` in the `/etc/systemd/system` directory:
 
 ```sh copy
 sudo nano /etc/systemd/system/wings.service
@@ -186,7 +273,8 @@ sudo systemctl enable --now wings
 
 ### 7. Node Allocations
 
-To connect to a node in-game, you must assign an Allocation to it. This is done under the `Allocation` tab, still under Nodes.
+To connect to a node in-game, you must assign an Allocation to it. This is done
+under the `Allocation` tab, still under Nodes, in the Node you created.
 
 <Callout type="info">
  To find the IP of your Wings server, type `hostname -I | awk '{print $1}'`. The output is the IP used for the allocation. You may also use this command instead: `ip addr | grep "inet "`.
@@ -194,10 +282,21 @@ To connect to a node in-game, you must assign an Allocation to it. This is done 
 
 <Callout type="error">DO NOT use 127.0.0.1 for allocations.</Callout>
 
-For more information, please see the official [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#node-allocations)
+- `IP Address`: Enter the IP address of your server.
+- `IP Alias`: This is optional and can be left blank, unless you have a `FQDN`
+  for that specific IP, or multiple IPs.
+- `Ports`: Enter the ports you wish to use for the server. The default port for
+  Minecraft is `25565`.
+
+For more information, please see the official
+[Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#node-allocations)
 
 ## Conclusion
 
-Congratulations! You are now ready to host a game server for yourself and your friends. You've set up everything from installation to configuration, and your server is ready to provide a great gaming experience.
+Congratulations! You are now ready to host a game server for yourself and your
+friends. You've set up everything from installation to configuration, and your
+server is ready to provide a great gaming experience.
+
+**More coming soon!**
 
 Happy Hosting!

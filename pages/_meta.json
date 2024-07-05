@@ -21,7 +21,7 @@
   "proxmox": "Proxmox",
   "truenas": "TrueNAS",
   "server-hosting": "Server Hosting",
-  "dockerCLI": "Docker-CLI",
+  "docker": "Docker",
   "linux": "Linux Guides",
   "windows": "Windows Guides",
   "styling-guide": {
