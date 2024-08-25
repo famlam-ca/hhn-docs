@@ -1,40 +1,51 @@
-import { Callout, Table } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Webserver Configuration
 
 <Callout type="warning">
  If you intend to use SSL configuration, you MUST create SSL certificates for your webserver to start. This guide will NOT cover that step; instead, we will use the NPM reverse network proxy.
 
-To create SSL certificates without NPM, refer to this official Pterodactyl [guide](https://pterodactyl.io/tutorials/creating_ssl_certificates.html).
+To create SSL certificates without NPM, refer to this official Pterodactyl
+[guide](https://pterodactyl.io/tutorials/creating_ssl_certificates.html).
 
 </Callout>
 
 ## Introduction
 
-Setting up a web server to host applications such as the Pterodactyl Panel requires meticulous configuration for optimal performance and security. This guide will walk you through configuring NGINX, a robust web server, to effectively serve your Pterodactyl instance. By following these steps, you'll set up a virtual host, fine-tune server settings, and prepare your environment to host game servers and other applications seamlessly. Let's get started!
+Setting up a web server to host applications such as the Pterodactyl Panel
+requires meticulous configuration for optimal performance and security. This
+guide will walk you through configuring NGINX, a robust web server, to
+effectively serve your Pterodactyl instance. By following these steps, you'll
+set up a virtual host, fine-tune server settings, and prepare your environment
+to host game servers and other applications seamlessly. Let's get started!
 
-For more detailed information and official documentation, you can visit the [Pterodactyl documentation](https://pterodactyl.io/panel/1.0/webserver_configuration.html#webserver-configuration).
+For more detailed information and official documentation, you can visit the
+[Pterodactyl documentation](https://pterodactyl.io/panel/1.0/webserver_configuration.html#webserver-configuration).
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- Completed [Installing Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
+- Completed
+  [Installing Pterodactyl Panel](/server-hosting/pterodactyl/installing-pterodactyl-panel).
 - Setup a reverse network proxy [NPM Guide](/server-hosting/npm).
 
 ## Step-by-Step Guide
 
-### 1. Remove the Default NGINX Config
+<Steps>
+### Remove the Default NGINX Config
 
-We will not be using this file. However, if you have never used NGINX and would like to familiarize yourself, open the file first and read through the comments.
+We will not be using this file. However, if you have never used NGINX and would
+like to familiarize yourself, open the file first and read through the comments.
 
 ```sh copy
 rm /etc/nginx/sites-enabled/default
 ```
 
-### 2. Create a Virtual Host
+### Create a Virtual Host
 
-Create a new file in the same location as the previous default NGINX config file.
+Create a new file in the same location as the previous default NGINX config
+file.
 
 <Callout type="info">
   The official Pterodactyl docs recommend naming the file `pterodactyl.conf`,
@@ -111,7 +122,7 @@ server {
 }
 ```
 
-### 3. Enabling Configuration
+### Enabling Configuration
 
 Enable your new NGINX config and restart the service.
 
@@ -123,7 +134,8 @@ Enable your new NGINX config and restart the service.
 sudo ln -s /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/pterodactyl.conf
 ```
 
-**_NOTE:_** To double-check whether you have correctly copied the server block, use this command before restarting the NGINX service: `nginx -t`
+**_NOTE:_** To double-check whether you have correctly copied the server block,
+use this command before restarting the NGINX service: `nginx -t`
 
 <Callout type="default">You need to restart NGINX regardless of OS.</Callout>
 
@@ -131,8 +143,12 @@ sudo ln -s /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
 ```
 
+</Steps>
+
 ## Conclusion
 
-Well done! You have successfully completed the webserver configuration part of setting up the Pterodactyl Panel. The next step is to install and configure the Wings for the Panel.
+Well done! You have successfully completed the webserver configuration part of
+setting up the Pterodactyl Panel. The next step is to install and configure the
+Wings for the Panel.
 
 Happy Hosting!

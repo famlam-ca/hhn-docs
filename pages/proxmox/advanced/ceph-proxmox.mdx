@@ -1,0 +1,197 @@
+import { Callout, Steps } from "nextra/components"
+
+# Deploy Hyper-Converged Ceph Cluster
+
+## Introduction
+
+In this guide we will deploy a hyper-converged Ceph cluster on a Proxmox VE
+cluster. This guide assumes you have a Proxmox VE cluster with at least three
+nodes. If you do not have a Proxmox Ve cluster, you can follow our guide on
+[Clustering Proxmox](/proxmox/advanced/clustering-proxmox).
+
+This guide will cover the following topics:
+
+- Installing Ceph on Proxmox
+- Configuring the Ceph cluster
+- Creating a Ceph pool
+
+<Callout type="info">
+  This guide will cover the deployment of a hyper-converged Ceph cluster using
+  the Proxmox Web UI. If you prefer to use the command line, you can refer to
+  the [official Proxmox
+  documentation](https://pve.proxmox.com/wiki/Deploy_Hyper-Converged_Ceph_Cluster).
+</Callout>
+
+## What is Ceph?
+
+Ceph is a distributed storage system that provides object storage, block
+storage, and file storage. Ceph is designed to be scalable and fault-tolerant,
+making it an ideal storage solution for cloud environments.
+
+## Prerequisites
+
+Before you begin, you will need the following:
+
+- A Proxmox VE cluster with at least three nodes
+  [Clustering Proxmox](/proxmox/advanced/clustering-proxmox)
+- A dedicated network for Ceph traffic (recommended)
+- At least one additional disk per node for Ceph OSDs
+
+## Step by Step Guide
+
+<Steps>
+
+### Install Ceph on Proxmox
+
+<Callout type="warning">
+  When installing Ceph on Proxmox without a Proxmox subscription, you will need
+  to use the `No Subscription` repository.
+</Callout>
+
+To install Ceph on Proxmox, follow these steps:
+
+1. Log in to the Proxmox Web UI.
+2. Click on the `Datacenter` node in the tree view.
+3. Click on the `Ceph` tab.
+4. Click on the `Install` button.
+5. Follow the on-screen instructions to install Ceph on your Proxmox cluster.
+   - We will be using `reef (18.2)` as the Ceph version.
+   - Click on the Repository drop-down menu, and select the `No Subscription`
+     repository.
+   - Click on the `Start reef installation` button. This will install Ceph on
+     your Proxmox cluster.
+
+<Callout type="info">
+  You may be prompted to enter [Y/n] to confirm the installation. Enter `Y` to
+  continue.
+</Callout>
+
+6. Once the installation is complete, you will be able to click the `Next`
+   button. Click on the `Next` button to continue.
+
+### Configure Ceph Cluster
+
+1. On the `Configuring` screen, select a Public Network IP/CIDR and Cluster
+   Network IP/CIDR. These networks should be separate from your Proxmox
+   management network.
+2. If you wish to configure the Number of replicas, and the Minumum replicas,
+   tick the `Advanced` checkbox at the bottom of the screen. For this guide, we
+   will leave the default settings.
+3. Click on the `Next` button to continue.
+4. On the `Success` screen, view the next steps, you will need to follow these
+   steps to complete the Ceph cluster configuration.
+5. Click on the `Finish` button to complete the installation.
+
+<Callout>Repeat the above steps on each node in your Proxmox cluster</Callout>
+
+### Create additional Ceph Monitors
+
+<Callout type="info">
+  It is recommended to have an odd number of monitors in your Ceph cluster. For
+  this guide, we will be creating three monitors.
+</Callout>
+
+1. Click on the Node in the tree view, on which you have installed Ceph.
+2. Similarly to the previous steps, click on the `Ceph` drop-down menu, and
+   click on the `Monitor` option.
+3. Click on the `Create` button.
+4. Select a `Host` from the drop-down menu, and click on the `Create` button.
+5. Repeat the above steps to create additional monitors for each node in your
+   Proxmox cluster.
+
+### Create additional Ceph Managers (Optional)
+
+<Callout type="info">
+  This step is optional, but it is recommended to have multiple managers in your
+  Ceph cluster for redundancy.
+</Callout>
+
+These steps are similar to creating additional monitors.
+
+1. In the same screen where you created the monitors, click on the `Create`
+   button, under the `Manager` section.
+2. Select a `Host` from the drop-down menu, and click on the `Create` button.
+3. Repeat the above steps to create additional managers for each node in your
+   Proxmox cluster.
+
+### Create Ceph OSDs
+
+<Callout type="warning">
+  You must have at least one OSD per node in your Ceph cluster, and it is
+  recommended to have multiple OSDs per node for redundancy.
+
+For this guide, we will be creating one OSD per node. You can create additional
+OSDs by following the same steps.
+
+</Callout>
+
+If you have added additional Managers, you can configure Ceph from any Node in
+your Proxmox cluster. Otherwise, you will need to configure Ceph from the Node
+where you have installed Ceph initially.
+
+1. Click on the Node in the tree view, which is your Ceph Manager.
+2. Click on the `Ceph` drop-down menu, and click on the `OSD` option.
+3. Click on the `Create: OSD` button.
+4. Select a disk from the `Disk` drop-down menu, on which you want to create the
+   OSD.
+5. If you wish to configure a different `DB Disk` for the OSD, you can select a
+   disk from the `DB Disk` drop-down menu.
+
+   <Callout type="info">
+     For this guide, we will leave this option as `use OSD disk`. Additionally
+     we will leave the `Advanced` options as default. For more information on
+     these options, you can refer to the [official Proxmox
+     documentation](https://pve.proxmox.com/wiki/Deploy_Hyper-Converged_Ceph_Cluster).
+   </Callout>
+
+6. Click on the `Create` button to create the OSD.
+
+### Create CephFS and Metadata Servers (Optional)
+
+To create a CephFS, you can follow these steps:
+
+1. Click on the Node in the tree view, which is your Ceph Manager.
+2. Click on the `Ceph` drop-down menu, and click on the `CephFS` option.
+3. Click on the `Create CephFS` button.
+4. Enter a `Name` for the CephFS, and configure the options as required. This
+   guide will not cover the configuration of these options.
+5. Click on the `Create` button.
+
+If you wish to configure Metadata Servers, you can do so by following these
+steps:
+
+1. On the same screen where you created the CephFS, click on the `Create` button
+   under the `Metadata Servers` section.
+2. Select a `Host` from the drop-down menu, and Enter an `Extra ID` for the
+   Metadata Server.
+3. Click on the `Create` button.
+
+### Create Ceph Pools
+
+Lastly, you must create a Ceph pool to store your data. Don't worry you are
+almost there!
+
+1. Click on the Node in the tree view, which is your Ceph Manager.
+2. Click on the `Ceph` drop-down menu, and click on the `Pools` option.
+3. Click on the `Create` button.
+4. Enter a `Name` for the pool, and configure the options as required. For this
+   guide we will leave the options as default.
+5. Click on the `Create` button.
+
+The Ceph Pool should now have been added to your tree view, under the Node where
+you created it.
+
+</Steps>
+
+## Conclusion
+
+Congratulations! You have successfully deployed a hyper-converged Ceph cluster
+on your Proxmox VE cluster. You can now use the Ceph cluster to store your VMs
+and LXC containers, as well as configuring High Availability (HA) for your
+Virtual Guests. A guide on Proxmox HA can be found below.
+
+## Next Steps
+
+- [Configuring High Availability on Proxmox](/proxmox/advanced/ha-proxmox)
+
+Happy Hosting!

@@ -1,3 +1,5 @@
+import { Steps } from "nextra/components"
+
 # Adding or Modifiying list of NTP Servers
 
 ## Summary
@@ -15,9 +17,10 @@ and Network first if you have NTP issues.
 - Linux Operating System (Tested on EndeavourOS)
 - Text Editor
 
-## Steps
+## Step by Step Guide
 
-1. **Start Editing the NTP Servers File**
+<Steps>
+### Start Editing the NTP Servers File
 
 ```bash copy
 sudo vim /etc/ntp.conf
@@ -27,7 +30,7 @@ Use an editor<sup>[1](#notes)</sup> on the NTP Servers file.
 
 _This file should be the same for most, if not all Linux Distributions._
 
-2. **Add or Modify Pools/Servers**
+### Add or Modify Pools/Servers
 
 There is usually a server/pool or multple servers/pools that already
 exist<sup>[2](#notes)</sup>.  
@@ -41,13 +44,13 @@ You can usually search the internet for your region's NTP Pool if you wanted to
 add them.  
 Comment out or remove lines if you don't want to use certain pools/servers.
 
-4. **Save your Edits**
+### Save your Edits
 
 Press `Esc` then `:` then type `wq` then press `Enter`<sup>[3](#notes)</sup>
 
 _This will save the file and exit you from vim._
 
-**You have Finished**
+</Steps>
 
 ## Conclusion
 

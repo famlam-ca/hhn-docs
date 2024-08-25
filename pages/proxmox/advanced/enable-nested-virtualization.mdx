@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Enable Nested Virtualization on Proxmox
 
@@ -13,6 +13,9 @@ To enable nested hardware-assisted virtualization:
 - Ensure your kernel version is >= 3.10 (usually the case after Proxmox VE 4.x).
 - Enable nested support.
 
+## Step-by-Step Guide
+
+<Steps>
 ### Check Nested Virtualization Status
 
 To check if nested virtualization is enabled:
@@ -54,11 +57,13 @@ cat /sys/module/kvm_intel/parameters/nested
 Y
 ```
 
-**_Note:_** Pay attention to the use of dash "-" and underscore "\_" in the module names.
+**_Note:_** Pay attention to the use of dash "-" and underscore "\_" in the
+module names.
 
 ### Configure Virtual Machine
 
-Then, create a guest where you install, for example, Proxmox as nested Virtualization Environment. Set the CPU type to "host":
+Then, create a guest where you install, for example, Proxmox as nested
+Virtualization Environment. Set the CPU type to "host":
 
 ```bash copy
 qm set <vmid> --cpu host
@@ -66,11 +71,16 @@ qm set <vmid> --cpu host
 
 ### Verify Nested Virtualization
 
-Once the guest OS is installed, if it's GNU/Linux, you can enter and verify that hardware virtualization support is enabled by doing:
+Once the guest OS is installed, if it's GNU/Linux, you can enter and verify that
+hardware virtualization support is enabled by doing:
 
 ```bash copy
 egrep '(vmx|svm)' --color=always /proc/cpuinfo
 ```
+
+</Steps>
+
+## Conclusion
 
 That's it! You've enabled nested hardware-assisted virtualization.
 

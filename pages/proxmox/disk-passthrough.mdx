@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Disk Passthrough on Proxmox
 
@@ -9,7 +9,10 @@ See [Sample Notes](#sample-notes) for example.
 
 </Callout>
 
-## Install Required Tools
+## Step-by-Step Guide
+
+<Steps>
+### Install Required Tools
 
 1. **Install `lshw`**
 
@@ -37,7 +40,7 @@ See [Sample Notes](#sample-notes) for example.
 
    **_NOTE:_** UNUSED SCSI# must be incremented for each disk.
 
-## Backup and Edit VM Configuration
+### Backup and Edit VM Configuration
 
 1. **Backup the VM Configuration File**
 
@@ -52,6 +55,8 @@ See [Sample Notes](#sample-notes) for example.
    ```
 
    - Append `,serial=<SERIAL#>` to the end of each added disk line.
+
+</Steps>
 
 ## Sample Notes
 

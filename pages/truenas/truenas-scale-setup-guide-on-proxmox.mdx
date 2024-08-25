@@ -1,3 +1,5 @@
+import { Steps } from "nextra/components"
+
 # TrueNAS Scale Setup Guide on Proxmox
 
 ## Minimum Hardware Specs
@@ -9,16 +11,18 @@
 
 ## Prerequisites
 
-- If you are installing TrueNAS scale on proxmox you must first passthrough each disk, or the entire storage controller: [Disk Passthrough on Proxmox](/proxmox/disk-passthrough)
+- If you are installing TrueNAS scale on proxmox you must first passthrough each
+  disk, or the entire storage controller:
+  [Disk Passthrough on Proxmox](/proxmox/disk-passthrough)
 
 ## Step-by-Step Guide
 
+<Steps>
 ### Install/Upgrade
 
 1. Select the boot device (should be at least 16 GB).
 2. Select YES to erase all partitions.
-3. Select admin.
-   **(root is depricated and not recommended)**
+3. Select admin. **(root is depricated and not recommended)**
 4. Set the admin password.
 5. Select YES for boot via UEFI.
 6. Complete the installation.
@@ -40,14 +44,16 @@
 3. **Configure Pool Layout**
 
    - For **Layout**, select **Mirror**.
-   - If the disks are identical, Automated Disk Selection should select the correct disks.
+   - If the disks are identical, Automated Disk Selection should select the
+     correct disks.
    - Otherwise, select **Manual Disk Selection**:
      - Click **Add** in the top right.
      - Drag and drop your disks from the left pane into the **MIRROR** area.
      - Click **Save Selection**.
 
 4. **Review and Save**
-   - Click **Save And Go To Review**, unless you want a more advanced setup (not covered here).
+   - Click **Save And Go To Review**, unless you want a more advanced setup (not
+     covered here).
    - Click **Create Pool**.
 
 ### Create Datasets
@@ -55,20 +61,23 @@
 1. Click **Datasets** in the sidebar.
 2. Click **Add Dataset** on the right side.
 
-   **To create a dataset at the root of the storage pool, ensure you select the pool before creating a dataset.**
+   **To create a dataset at the root of the storage pool, ensure you select the
+   pool before creating a dataset.**
 
 3. Specify a name.
 4. Select **SMB** for Dataset Preset.
 5. **Under Advanced Options**:
 
-   - Set sync to **Disabled** and Click **OK** when prompted.
-     **Faster performance, at the cost of losing the last 5 sec of data upon crash/power loss.**
+   - Set sync to **Disabled** and Click **OK** when prompted. **Faster
+     performance, at the cost of losing the last 5 sec of data upon crash/power
+     loss.**
    - Leave the rest default.
 
    **Optional:**
 
    - **Quota**: Limits the maximum capacity of the Dataset.
-   - **Record Size**: For larger files, choose a larger record size (1M is most efficient).
+   - **Record Size**: For larger files, choose a larger record size (1M is most
+     efficient).
 
 6. Click **Save**.
 
@@ -87,19 +96,23 @@
 
    - Give the user a name, email (optional), and set a password.
    - Untick **Create New Primary Group**.
-   - Set the **Primary Group** field to the previously created group, e.g., HomeUsers.
+   - Set the **Primary Group** field to the previously created group, e.g.,
+     HomeUsers.
    - Click **Save**.
 
    #### Home Directory Setup
 
-   - For **Home Directory**, navigate to the HomeShare dataset.
-     **Home Directory is covered here later on in the documentation.**
+   - For **Home Directory**, navigate to the HomeShare dataset. **Home Directory
+     is covered here later on in the documentation.**
    - Check **Create Home Directory**.
    - Ensure **Samba Authentication** is selected.
    - Click **Save**.
 
+</Steps>
+
 ## SMB and Share Configuration
 
+<Steps>
 ### If Samba is not already running
 
 1. Click on **System Settings** in the sidebar.
@@ -116,18 +129,19 @@
 
 ### If Samba is already running
 
-**_NOTE:_** If you set up the Dataset with the SMB preset, you will not have to create an SMB share.
+**_NOTE:_** If you set up the Dataset with the SMB preset, you will not have to
+create an SMB share.
 
 1. Click **Shares** in the sidebar.
 2. Click **Add** in the Windows (SMB) Shares section.
 3. Select a dataset to share.
-4. Provide a share name.
-   **It is recommended to keep it the same as the dataset name.**
+4. Provide a share name. **It is recommended to keep it the same as the dataset
+   name.**
 
    #### For Home Share use
 
-   - For **Purpose**, select **Private SMB Dataset and Shares**.
-     Under Advanced Options:
+   - For **Purpose**, select **Private SMB Dataset and Shares**. Under Advanced
+     Options:
      - Uncheck **Browsable to Network Clients**.
      - Check **Use as Home Share**.
 
@@ -135,15 +149,25 @@
 
    **Configure Filesystem ACL**
 
-   1. Still inside **Shares** and the Windows (SMB) Shares section, click the shield icon.
-   2. Inside the ACL editor, remove **Group - builtin_users** and **Group - builtin_administrators**.
+   1. Still inside **Shares** and the Windows (SMB) Shares section, click the
+      shield icon.
+   2. Inside the ACL editor, remove **Group - builtin_users** and **Group -
+      builtin_administrators**.
    3. Click **Add Item**:
       - On the right side under **Who**, select **Group**.
-      - For **Group**, select the group that you created earlier, e.g., HomeUsers.
+      - For **Group**, select the group that you created earlier, e.g.,
+        HomeUsers.
       - On the left side, check **Apply permissions recursively**.
       - Check **Confirm** and **Continue** in the dialog.
       - Click **Save Access Control List**.
 
    **Enable the SMB service if prompted.**
+
+</Steps>
+
+## Conclusion
+
+Congratulations! You have now successfully set up TrueNAS Scale on Proxmox. You
+can now start using your new NAS for storage, backups, and more.
 
 Happy virtualizing!

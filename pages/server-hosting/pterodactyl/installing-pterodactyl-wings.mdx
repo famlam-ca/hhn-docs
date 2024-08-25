@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Installing Pterodactyl Wings
 
@@ -52,7 +52,8 @@ For more information, please visit the official
 
 ## Step-by-Step Guide
 
-### 1. Installing Docker
+<Steps>
+### Installing Docker
 
 To install Docker using a one-liner, run the following command:
 
@@ -85,7 +86,7 @@ Check the official Pterodactyl guide for
 
 </Callout>
 
-### 2. Start Docker on Boot
+### Start Docker on Boot
 
 To start Docker when your system starts, run the following command:
 
@@ -123,7 +124,7 @@ Some Linux distros may ignore `GRUB_CMDLINE_LINUX_DEFAULT`. In this case, use
 
 </Callout>
 
-### 3. Installing Wings
+### Installing Wings
 
 Ensure you have the required directory structure. Create the following directory
 to ensure Wings works correctly:
@@ -145,7 +146,7 @@ This can also be easily changed while creating the node.
 
 </Callout>
 
-### 4. Configure
+### Configure
 
 Once the installation of Wings and the required components is complete, you can
 create a node on your previously installed Panel. Go to your Panel's
@@ -158,6 +159,9 @@ create a node on your previously installed Panel. Go to your Panel's
 
 **NOTE**: When creating a NPM host for your Wings, you must use http as the
 `Scheme` and port `443`, when using SSL a `FQDN`.
+
+**NOTE**: `WebSockets Support` must also be enabled on the Wings NPM host to
+function correctly.
 
 </Callout>
 
@@ -208,7 +212,7 @@ the code block and paste it into a new file called `config.yml` in
 An alternative and easier way is to click on the `Generate Token` button on the
 right of the screen and paste the command into your Wings&apos; terminal.
 
-### 5. Starting Wings
+### Starting Wings
 
 To start Wings, run the following command. This command starts the Wings process
 in debug mode. Look through the logs and ensure there are no errors. Once you
@@ -228,7 +232,7 @@ sudo wings --debug
   installation of Wings.
 </Callout>
 
-### 6. Daemonizing (using systemd)
+### Daemonizing (using systemd)
 
 Much like the pteroq.service we created in this
 [guide](/server-hosting/pterodactyl/installing-pterodactyl-panel#2-create-queue-worker),
@@ -271,7 +275,7 @@ Then, run the following command to reload systemd and start the Wings service:
 sudo systemctl enable --now wings
 ```
 
-### 7. Node Allocations
+### Node Allocations
 
 To connect to a node in-game, you must assign an Allocation to it. This is done
 under the `Allocation` tab, still under Nodes, in the Node you created.
@@ -290,6 +294,8 @@ under the `Allocation` tab, still under Nodes, in the Node you created.
 
 For more information, please see the official
 [Pterodactyl documentation](https://pterodactyl.io/wings/1.0/installing.html#node-allocations)
+
+</Steps>
 
 ## Conclusion
 

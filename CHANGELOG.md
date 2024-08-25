@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.0.8 Changelog
+
+**New Guides**
+
+- `Setup Playit.gg`
+- `Ceph on Proxmox`
+- `HA on Proxmox`
+
+**Untracked**
+
+- `setup-playit-gg.mdx`
+- `ceph-proxmox.mdx`
+- `ha-proxmox.mdx`
+- Added `local-address-config.png`
+
+**Modified**
+
+- Added `Steps` component to all guides.
+- Updated the logo in `theme.config.tsx`
+- Moved `globals.css`
+- Updated formatting
+- Added WebSockets Support note to `Pterodactyl Wings` guide
+- Added `Conclusion` to `TrueNAS Scale Setup` guide
+- New `favicon.ico`
+- New `favicon.png`
+
+**Bug fixes**
+
+- Spelling and formatting in `NPM` guide
+
+**Full Changelog**:
+[1.0.7...1.0.8](https://github.com/famlam-ca/hhn-documentation/compare/1.0.6...1.0.7)
+
 ## 1.0.7 Changelog
 
 **New Guides**

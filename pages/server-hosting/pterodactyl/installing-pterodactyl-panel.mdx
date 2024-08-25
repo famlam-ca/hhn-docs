@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Installing Pterodactyl Panel
 
@@ -25,7 +25,8 @@ Before you begin, ensure you have the following:
 
 ## Step-by-Step Guide
 
-### 1. Dependency Installation
+<Steps>
+### Dependency Installation
 
 We will first begin by installing all of Pterodactyl's required dependencies.
 
@@ -72,7 +73,7 @@ We will first begin by installing all of Pterodactyl's required dependencies.
    sudo apt -y install php8.1 php8.1-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
    ```
 
-### 2. Installing Composer
+### Installing Composer
 
 Composer is required for dependency management in PHP. It will be used to ship
 all code needed to operate the panel.
@@ -81,7 +82,7 @@ all code needed to operate the panel.
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
-### 3. Download Files
+### Download Files
 
 Before we can download the files, we need a place to store them.
 
@@ -99,7 +100,7 @@ tar -xzvf panel.tar.gz
 chmod -R 755 storage/* bootstrap/cache/
 ```
 
-### 4. Installation
+### Installation
 
 Now that we have all the files needed, we can configure the base Panel.
 
@@ -186,7 +187,7 @@ See reference
 php artisan p:environment:mail
 ```
 
-#### Database Setup
+### Database Setup
 
 It is time to set up the database contents. The command below will create the
 database tables and all the base Nests and Eggs that come with Pterodactyl.
@@ -242,7 +243,7 @@ chown -R nginx:nginx /var/www/pterodactyl/*
 chown -R apache:apache /var/www/pterodactyl/*
 ```
 
-### 5. Queue Listeners
+### Queue Listeners
 
 For a more detailed explanation of queue listeners and what they do, see the
 official
@@ -321,6 +322,8 @@ we just created.
 sudo systemctl enable --now redis-server
 sudo systemctl enable --now pteroq.service
 ```
+
+</Steps>
 
 ## Conclusion
 

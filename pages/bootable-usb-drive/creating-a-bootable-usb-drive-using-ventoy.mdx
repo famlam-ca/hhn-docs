@@ -1,8 +1,15 @@
+import { Steps } from "nextra/components"
+
 # Creating a Bootable USB Drive using Ventoy
 
-## Summary
+## Introduction
 
-Ventoy is an open-source tool designed to create bootable USB drives that allow you to boot multiple ISO files from a single USB drive without the need to reformat it each time. You simply copy the ISO files onto the USB drive, and Ventoy presents a menu at boot time to select which ISO to boot from. This makes it extremely convenient for testing and installing multiple operating systems or tools from a single USB drive.
+Ventoy is an open-source tool designed to create bootable USB drives that allow
+you to boot multiple ISO files from a single USB drive without the need to
+reformat it each time. You simply copy the ISO files onto the USB drive, and
+Ventoy presents a menu at boot time to select which ISO to boot from. This makes
+it extremely convenient for testing and installing multiple operating systems or
+tools from a single USB drive.
 
 ### Key Features:
 
@@ -12,71 +19,91 @@ Ventoy is an open-source tool designed to create bootable USB drives that allow 
 - Supports various ISO files, including Windows, Linux, and other utilities
 - Easy to update and add new ISOs
 
-## Requirements
+## Prerequisites
 
 - A USB drive with sufficient storage
 - A Windows computer
 - Ventoy software [Ventoy website](https://www.ventoy.net/en/index.html)
 - ISO files of the operating systems you want to install
 
-## Steps
+## Step-by-Step Guide
 
-1. **Download and Install Ventoy**
+<Steps>
+### Download and Install Ventoy
 
-   - Visit the [Ventoy website](https://www.ventoy.net/en/download.html) and download the latest version of Ventoy.
-   - Extract the downloaded ZIP file to a location on your computer.
+- Visit the [Ventoy website](https://www.ventoy.net/en/download.html) and
+  download the latest version of Ventoy.
+- Extract the downloaded ZIP file to a location on your computer.
 
-2. **Insert Your USB Drive**
+### Insert Your USB Drive\*
 
-   - Plug your USB drive into an available USB port on your computer.
+- Plug your USB drive into an available USB port on your computer.
 
-3. **Launch Ventoy**
+### Launch Ventoy
 
-   - Open the extracted Ventoy folder and run the `Ventoy2Disk.exe` executable file.
+- Open the extracted Ventoy folder and run the `Ventoy2Disk.exe` executable
+  file.
 
-4. **Select the USB Drive in Ventoy**
+### Select the USB Drive in Ventoy
 
-   - In the **Device** dropdown, select your USB drive. Make sure you choose the correct drive as this process will erase all data on the selected USB drive.
+- In the **Device** dropdown, select your USB drive. Make sure you choose the
+  correct drive as this process will erase all data on the selected USB drive.
 
-5. **Install Ventoy**
+### Install Ventoy
 
-   - Click the **Install** button.
-   - You will be prompted with a warning that all data on the USB drive will be destroyed. Confirm to proceed.
-   - If a security warning pops up, confirm to allow the installation to continue.
+- Click the **Install** button.
+- You will be prompted with a warning that all data on the USB drive will be
+  destroyed. Confirm to proceed.
+- If a security warning pops up, confirm to allow the installation to continue.
 
-6. **Wait for Installation Completion**
+### Wait for Installation Completion
 
-   - Ventoy will install its bootloader onto the USB drive. This process should be quick.
-   - Once the installation is complete, you will see a message saying **Installation Successful**.
+- Ventoy will install its bootloader onto the USB drive. This process should be
+  quick.
+- Once the installation is complete, you will see a message saying
+  **Installation Successful**.
 
-7. **Copy ISO Files to USB Drive**
+### Copy ISO Files to USB Drive
 
-   - Open File Explorer and navigate to your USB drive.
-   - Copy and paste the ISO files of the operating systems you want to use into the root directory of the USB drive.
+- Open File Explorer and navigate to your USB drive.
+- Copy and paste the ISO files of the operating systems you want to use into the
+  root directory of the USB drive.
 
-8. **Eject the USB Drive**
+### Eject the USB Drive
 
-   - Safely eject your USB drive from the computer, by locating a USB drive symbol on your taskbar and right clicking it. From the context menu eject the USB drive that you are using for this guide.
+- Safely eject your USB drive from the computer, by locating a USB drive symbol
+  on your taskbar and right clicking it. From the context menu eject the USB
+  drive that you are using for this guide.
+
+</Steps>
 
 ## Boot from the USB Drive
 
-1. **Restart Your Computer**
+<Steps>
+### Restart Your Computer
 
-   - Insert the Ventoy USB drive into the computer where you want to use the bootable ISOs.
-   - Restart the computer.
+- Insert the Ventoy USB drive into the computer where you want to use the
+  bootable ISOs.
+- Restart the computer.
 
-2. **Enter Boot Menu**
+### Enter Boot Menu
 
-   - During the boot process, press the key that opens the boot menu (usually F2, F10, F12, ESC, or DEL depending on your computer's motherboard).
-   - When in doubt pressing all of them has never failed me.
+- During the boot process, press the key that opens the boot menu (usually F2,
+  F10, F12, ESC, or DEL depending on your computer's motherboard).
+- When in doubt pressing all of them has never failed me.
 
-3. **Select USB Drive**
+### Select USB Drive
 
-   - From the boot menu, select your USB drive to start Ventoy.
+- From the boot menu, select your USB drive to start Ventoy.
 
-4. **Choose an ISO to Boot**
+### Choose an ISO to Boot
 
-   - Ventoy will present a menu with a list of the ISO files you copied onto the USB drive.
-   - Use the arrow keys to select the ISO file you want to boot from and press Enter.
+- Ventoy will present a menu with a list of the ISO files you copied onto the
+  USB drive.
+- Use the arrow keys to select the ISO file you want to boot from and press
+  Enter.
 
-You have now successfully created a bootable USB drive using Ventoy. Happy installing!
+</Steps>
+
+You have now successfully created a bootable USB drive using Ventoy. Happy
+installing!

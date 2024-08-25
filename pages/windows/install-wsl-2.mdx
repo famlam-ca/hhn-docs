@@ -1,10 +1,14 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Installing WSL 2 with Ubuntu
 
 ## Introduction
 
-Windows Subsystem for Linux (WSL) allows you to run a Linux distribution alongside your Windows 10/11 environment. WSL 2, the latest version, provides improved performance and full system call compatibility. In this guide, we will walk you through the process of installing WSL 2 and setting up Ubuntu as your Linux distribution.
+Windows Subsystem for Linux (WSL) allows you to run a Linux distribution
+alongside your Windows 10/11 environment. WSL 2, the latest version, provides
+improved performance and full system call compatibility. In this guide, we will
+walk you through the process of installing WSL 2 and setting up Ubuntu as your
+Linux distribution.
 
 ## Prerequisites
 
@@ -17,23 +21,32 @@ Before you begin, ensure you have the following:
 
 ## Step-by-Step Guide
 
-### 1. Enable Virtualization
+<Steps>
+### Enable Virtualization
 
-First, you need to ensure that virtualization is enabled in your system's BIOS/UEFI settings.
+First, you need to ensure that virtualization is enabled in your system's
+BIOS/UEFI settings.
 
-1. Restart your computer and enter the BIOS/UEFI setup. This is usually done by pressing a key like `F2`, `F10`, `Delete`, or `Esc` during startup. The exact key varies by manufacturer. When in doubt pressing all of them has never failed me.
+1. Restart your computer and enter the BIOS/UEFI setup. This is usually done by
+   pressing a key like `F2`, `F10`, `Delete`, or `Esc` during startup. The exact
+   key varies by manufacturer. When in doubt pressing all of them has never
+   failed me.
 
-2. Once in the BIOS/UEFI setup, look for virtualization settings. These are often found under `Advanced`, `CPU Configuration`, or a similar section.
+2. Once in the BIOS/UEFI setup, look for virtualization settings. These are
+   often found under `Advanced`, `CPU Configuration`, or a similar section.
 
-3. Enable virtualization. This setting may be labeled as `Intel VT-x`, `Intel Virtualization Technology`, `AMD-V`, or `SVM Mode`.
+3. Enable virtualization. This setting may be labeled as `Intel VT-x`,
+   `Intel Virtualization Technology`, `AMD-V`, or `SVM Mode`.
 
 4. Save your changes and exit the BIOS/UEFI setup. Your computer will restart.
 
-### 2. Enable WSL
+### Enable WSL
 
-With virtualization enabled, you can now enable WSL on your Windows 10/11 system.
+With virtualization enabled, you can now enable WSL on your Windows 10/11
+system.
 
-1. Open **PowerShell** as an administrator. You can do this by right-clicking the Start button and selecting **Terminal (Admin)**.
+1. Open **PowerShell** as an administrator. You can do this by right-clicking
+   the Start button and selecting **Terminal (Admin)**.
 
 2. Enter the following command to enable WSL:
 
@@ -46,17 +59,20 @@ With virtualization enabled, you can now enable WSL on your Windows 10/11 system
      set WSL 2 as the default version.
    </Callout>
 
-### 3. Install Ubuntu
+### Install Ubuntu
 
 With WSL enabled, the next step is to install Ubuntu.
 
 1. Open **Microsoft Store** from the Start menu.
 
-2. In the search bar, type **Ubuntu** and select the version you prefer (e.g., Ubuntu 20.04 LTS).
+2. In the search bar, type **Ubuntu** and select the version you prefer (e.g.,
+   Ubuntu 20.04 LTS).
 
-3. Click the **Install** button. The installation process may take a few minutes.
+3. Click the **Install** button. The installation process may take a few
+   minutes.
 
-4. Once installed, click **Launch** to start Ubuntu. You will be prompted to create a new user account and password for your Ubuntu environment.
+4. Once installed, click **Launch** to start Ubuntu. You will be prompted to
+   create a new user account and password for your Ubuntu environment.
 
 <Callout type="default">
   You can choose from various other Linux distributions available in the
@@ -65,7 +81,7 @@ With WSL enabled, the next step is to install Ubuntu.
   [(Winaero)](https://winaero.com/list-available-wsl-linux-distros-windows-10/).
 </Callout>
 
-### 4. Verify Installation
+### Verify Installation
 
 To ensure everything is set up correctly, you can verify the installation.
 
@@ -79,7 +95,7 @@ To ensure everything is set up correctly, you can verify the installation.
 
    You should see Ubuntu listed with version 2.
 
-### 5. Update and Upgrade Ubuntu
+### Update and Upgrade Ubuntu
 
 After installation, it's a good idea to update and upgrade your Ubuntu packages.
 
@@ -92,24 +108,27 @@ After installation, it's a good idea to update and upgrade your Ubuntu packages.
 
    Follow the prompts to complete the updates.
 
+</Steps>
+
 ## Troubleshooting
 
 ### Outdated Kernel Issues
 
-If you encounter issues where the installation is not using WSL 2, it might be due to an outdated kernel. Follow these steps to resolve it:
+If you encounter issues where the installation is not using WSL 2, it might be
+due to an outdated kernel. Follow these steps to resolve it:
 
-1. **Check WSL Version:**
-   Ensure that WSL 2 is set as the default version.
+1. **Check WSL Version:** Ensure that WSL 2 is set as the default version.
 
-   ```powershell copy
-   wsl --set-default-version 2
-   ```
+```powershell copy
+wsl --set-default-version 2
+```
 
-2. **Update WSL Kernel:**
-   Download and install the latest WSL 2 Linux kernel update package from the [Microsoft WSL 2 kernel update page](https://aka.ms/wsl2kernel).
+2. **Update WSL Kernel:** Download and install the latest WSL 2 Linux kernel
+   update package from the
+   [Microsoft WSL 2 kernel update page](https://aka.ms/wsl2kernel).
 
-3. **Set Distribution to WSL 2:**
-   If you have already installed Ubuntu and it's not using WSL 2, set the version explicitly.
+3. **Set Distribution to WSL 2:** If you have already installed Ubuntu and it's
+   not using WSL 2, set the version explicitly.
 
    ```powershell copy
    wsl --set-version Ubuntu-20.04 2
@@ -120,8 +139,7 @@ If you encounter issues where the installation is not using WSL 2, it might be d
      using a different version.
    </Callout>
 
-4. **Restart WSL:**
-   Restart the WSL to apply changes.
+4. **Restart WSL:** Restart the WSL to apply changes.
 
    ```powershell copy
    wsl --shutdown
@@ -129,21 +147,28 @@ If you encounter issues where the installation is not using WSL 2, it might be d
 
    Then, relaunch your Ubuntu terminal.
 
-5. **Verify Kernel Version:**
-   Check the kernel version inside the Ubuntu terminal to ensure it reflects WSL 2.
+5. **Verify Kernel Version:** Check the kernel version inside the Ubuntu
+   terminal to ensure it reflects WSL 2.
 
    ```bash copy
    uname -r
    ```
 
-   You should see a kernel version starting with `4.19` or higher, indicating WSL 2.
+   You should see a kernel version starting with `4.19` or higher, indicating
+   WSL 2.
 
-If these steps don't resolve the issue, ensure your Windows 11 installation is up to date, as updates may include important fixes and improvements for WSL.
+If these steps don't resolve the issue, ensure your Windows 11 installation is
+up to date, as updates may include important fixes and improvements for WSL.
 
 ## Conclusion
 
-Congratulations! You have successfully installed WSL 2 with Ubuntu on your Windows 10/11 machine. You can now enjoy the benefits of both Windows and Linux in a seamless environment. WSL 2 provides a powerful toolset for developers, sysadmins, and IT enthusiasts, allowing you to leverage Linux capabilities directly from your Windows system.
+Congratulations! You have successfully installed WSL 2 with Ubuntu on your
+Windows 10/11 machine. You can now enjoy the benefits of both Windows and Linux
+in a seamless environment. WSL 2 provides a powerful toolset for developers,
+sysadmins, and IT enthusiasts, allowing you to leverage Linux capabilities
+directly from your Windows system.
 
-Feel free to explore and customize your Ubuntu environment, install additional packages, and integrate it with your existing Windows workflow.
+Feel free to explore and customize your Ubuntu environment, install additional
+packages, and integrate it with your existing Windows workflow.
 
 Happy coding!

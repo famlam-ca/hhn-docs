@@ -1,3 +1,5 @@
+import { Steps } from "nextra/components"
+
 # Proxmox Setup Guide
 
 ## Introduction
@@ -19,9 +21,10 @@ Before you begin, ensure you have the following:
 - Proxmox VE ISO image, which can be downloaded from the
   [Proxmox download page](https://www.proxmox.com/en/downloads/proxmox-virtual-environment).
 
-## Step-by-Step Installation Guide
+## Step-by-Step Guide
 
-### Step 1: Prepare Your Installation Media
+<Steps>
+### Prepare Your Installation Media
 
 1. **Download the Proxmox VE ISO**: Visit the
    [Proxmox download page](https://www.proxmox.com/en/downloads/proxmox-virtual-environment)
@@ -30,7 +33,7 @@ Before you begin, ensure you have the following:
    guide that covers this setup, step-by-step
    [here](/bootable-usb-drive/creating-a-bootable-usb-drive-using-rufus).
 
-### Step 2: Boot and Install Proxmox VE
+### Boot and Install Proxmox VE
 
 1. **Boot from the USB Drive**: Insert the bootable USB drive into your server
    and boot from it. You may need to adjust the BIOS/UEFI settings to prioritize
@@ -56,7 +59,7 @@ Before you begin, ensure you have the following:
 should **NOT** be changed after creating guests or joining a cluster. To learn
 more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
 
-### Step 3: First Boot and Basic Configuration
+### First Boot and Basic Configuration
 
 1. **Reboot the System**: Once the installation is complete, remove the USB
    drive and reboot your server.
@@ -66,7 +69,7 @@ more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
 3. **Login to Proxmox VE**: Use the root account and the password you set during
    installation to log in.
 
-### Step 4: Update Proxmox VE
+### Update Proxmox VE
 
 1. **Update Package Repository**: Open the shell, by navigating to \<NODE_NAME\>
    or SSH into your Proxmox server and run the following commands to update the
@@ -87,7 +90,7 @@ more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
    pveupgrade
    ```
 
-### Step 5: Configure Storage (Optional)
+### Configure Storage (Optional)
 
 1. **Add Local Storage**: Navigate to `Datacenter > Storage` in the web
    interface. Add a new local storage for ISO images, backups, and containers.
@@ -95,7 +98,7 @@ more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
    add it under `Datacenter > Storage` by selecting the appropriate storage type
    (NFS, CIFS, etc.).
 
-### Step 6: Create Virtual Machines and Containers
+### Create Virtual Machines and Containers
 
 1. **Create a Virtual Machine (VM)**: Navigate to `Datacenter > Create VM`.
    Follow the wizard to configure the VM, including selecting an ISO image,
@@ -104,12 +107,14 @@ more about Proxmox clusters click [here](/proxmox/advanced/clustering-proxmox).
    wizard to configure the container, choosing the desired OS template and
    resource allocation.
 
-### Step 7: Backup and Restore (Recommended)
+### Backup and Restore (Recommended)
 
 1. **Set Up Backup**: Configure backup jobs under `Datacenter > Backup` to
    automate backups of your VMs and containers.
 2. **Restore from Backup**: Use the Restore option under the Storage menu to
    restore VMs and containers from backup files.
+
+</Steps>
 
 ## Conclusion
 

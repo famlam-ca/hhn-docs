@@ -1,4 +1,6 @@
 {
   "enable-nested-virtualization": "Enable Nested Virtualization",
-  "clustering-proxmox": "Clustering Proxmox"
+  "clustering-proxmox": "Clustering Proxmox",
+  "ceph-proxmox": "Ceph on Proxmox",
+  "ha-proxmox": "HA on Proxmox"
 }

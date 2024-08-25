@@ -1,0 +1,61 @@
+import { Callout, Steps } from "nextra/components"
+
+# Configuring a High Availability Proxmox Cluster
+
+## Introduction
+
+This guide is a simple one, it will walk you through the process of setting up
+High Availability in a Proxmox cluster.
+
+## What is High Availability?
+
+High Availability (HA) is a feature that ensures that your virtual guests are
+always available, even if a node in the cluster fails. When a node fails, the
+virtual guests running on that node are automatically migrated to another node
+in the cluster.
+
+## Prerequisites
+
+- A Proxmox cluster with at least three nodes
+  [Clustering Proxmox](/proxmox/advanced/clustering-proxmox)
+- Shared storage between the nodes [Ceph Guide](/proxmox/advanced/ceph-proxmox)
+- A network bridge for the HA network (recommended)
+
+## Step by Step Guide
+
+<Steps>
+
+### Create a HA Group (Optional)
+
+HA groups are used to group Virtual Guests together to ensure they are started
+only on the nodes in the group.
+
+1. Navigate to the `Datacenter` view.
+2. Click on the `HA` drop-down menu, then click on the `Groups` option.
+3. Click on the `Create` button.
+4. Enter a name for the group in the `ID` field.
+5. Select the nodes you want to add to the group.
+6. You may also configure the `restricted`, and `nofailback` options as needed.
+7. Click on the `Create` button.
+
+### Configure HA Resources
+
+1. Click on the `HA` drop-down menu
+2. Under the `Resources` section, click on the `Add` button.
+3. In the `VM` field, select the virtual guests you wish to be highly available.
+4. In the `Group` field, select the HA group you created in the previous step.
+5. Configure the `Max. Restart`, `Max. Relocate` and `Requested State` options
+   as needed.
+6. Then click on the `Add` button.
+
+</Steps>
+
+## Conclusion
+
+Congratulations, that's it! Promox HA is that simple to configure.
+
+## Next Steps
+
+- More advanced Proxmox guides coming soon! 😊
+
+Happy Hosting!

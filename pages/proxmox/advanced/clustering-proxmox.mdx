@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Clustering Proxmox with Three Nodes
 
@@ -8,37 +8,59 @@ import { Callout } from "nextra/components"
 
 ## Introduction
 
-Clustering Proxmox provides high availability and load balancing for virtual machines and containers. With a minimum of three nodes, you can create a resilient cluster capable of tolerating the failure of a single node without downtime.
+Clustering Proxmox provides high availability and load balancing for virtual
+machines and containers. With a minimum of three nodes, you can create a
+resilient cluster capable of tolerating the failure of a single node without
+downtime.
 
 ### Why Three Nodes?
 
-Proxmox recommends a minimum of three nodes for a cluster due to several reasons:
+Proxmox recommends a minimum of three nodes for a cluster due to several
+reasons:
 
-1. **Fault Tolerance**: With three nodes, the cluster can continue operating even if one node fails. Each node acts as a redundant backup for the others, ensuring that services remain available in the event of hardware failure or maintenance.
+1. **Fault Tolerance**: With three nodes, the cluster can continue operating
+   even if one node fails. Each node acts as a redundant backup for the others,
+   ensuring that services remain available in the event of hardware failure or
+   maintenance.
 
-2. **Quorum Requirement**: Proxmox clusters use a quorum algorithm to ensure data integrity and prevent split-brain scenarios. A cluster with an odd number of nodes (e.g., three) ensures that there is always a majority to establish quorum and make decisions about resource allocation and failover.
+2. **Quorum Requirement**: Proxmox clusters use a quorum algorithm to ensure
+   data integrity and prevent split-brain scenarios. A cluster with an odd
+   number of nodes (e.g., three) ensures that there is always a majority to
+   establish quorum and make decisions about resource allocation and failover.
 
-3. **Load Distribution**: Three nodes allow for better distribution of virtual machines and containers across the cluster. This helps prevent resource contention and improves overall performance by spreading the workload evenly.
+3. **Load Distribution**: Three nodes allow for better distribution of virtual
+   machines and containers across the cluster. This helps prevent resource
+   contention and improves overall performance by spreading the workload evenly.
 
-4. **Scalability**: While three nodes are the minimum for a Proxmox cluster, additional nodes can be added for increased scalability and redundancy. However, starting with three nodes provides a solid foundation for building a resilient infrastructure.
+4. **Scalability**: While three nodes are the minimum for a Proxmox cluster,
+   additional nodes can be added for increased scalability and redundancy.
+   However, starting with three nodes provides a solid foundation for building a
+   resilient infrastructure.
 
 ## Prerequisites
 
-- **Three Physical Servers**: Each server should meet the minimum hardware requirements for Proxmox VE.
-- **Proxmox VE ISO**: Download the latest Proxmox VE ISO from the official website.
-- **Network Configuration**: Ensure that each server has a unique hostname, IP address, and is connected to a network accessible by all nodes.
+- **Three Physical Servers**: Each server should meet the minimum hardware
+  requirements for Proxmox VE.
+- **Proxmox VE ISO**: Download the latest Proxmox VE ISO from the official
+  website.
+- **Network Configuration**: Ensure that each server has a unique hostname, IP
+  address, and is connected to a network accessible by all nodes.
 
 ## Step-by-Step Guide
 
-### 1. Install Proxmox VE on Each Node
+<Steps>
+### Install Proxmox VE on Each Node
 
-If you require assistance with the installation of Proxmox VE, we have a detailed guide covering the installation process step-by-step [here](/proxmox/proxmox-setup-guide).
+If you require assistance with the installation of Proxmox VE, we have a
+detailed guide covering the installation process step-by-step
+[here](/proxmox/proxmox-setup-guide).
 
 1. Boot each server from the Proxmox VE ISO.
 2. Follow the on-screen instructions to install Proxmox VE on each server.
-3. Ensure that the network configuration is correctly set up during the installation process.
+3. Ensure that the network configuration is correctly set up during the
+   installation process.
 
-### 2. Configure Network Time Protocol (NTP) (Optional)
+### Configure Network Time Protocol (NTP) (Optional)
 
 1. Log in to each Proxmox node via SSH or the console.
 2. Edit the NTP configuration file:
@@ -60,7 +82,7 @@ NTP=your.ntp.server
 sudo systemctl restart systemd-timesyncd
 ```
 
-### 3. Configure Hostname Resolution
+### Configure Hostname Resolution
 
 1. Edit the hosts file on each node:
 
@@ -78,9 +100,10 @@ sudo nano /etc/hosts
 
 3. Save and exit the file.
 
-### 4. Set Up SSH Key Authentication
+### Set Up SSH Key Authentication
 
-1. Generate an SSH key pair on the first node (replace \<your_email\> with your actual email address):
+1. Generate an SSH key pair on the first node (replace \<your_email\> with your
+   actual email address):
 
 ```bash copy
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
@@ -95,35 +118,50 @@ ssh-copy-id user@node3_IP
 
 3. Test SSH access to each node to ensure key authentication works.
 
-### 5. Create Proxmox Cluster
+### Create Proxmox Cluster
 
 1.  Log in to the Proxmox web interface of one node using a web browser.
 2.  Navigate to Datacenter > Cluster.
 3.  Click Create Cluster and enter a name for the cluster.
-4.  Add the other nodes to the cluster using their IP addresses and SSH credentials.
+4.  Add the other nodes to the cluster using their IP addresses and SSH
+    credentials.
 5.  Confirm the addition of each node.
 
-### 6. Verify Cluster Configuration
+### Verify Cluster Configuration
 
 1. In the Proxmox web interface, navigate to Datacenter > Cluster.
 2. Ensure that all nodes are listed and have a status of "online".
 3. Verify that shared storage is available and accessible from all nodes.
 
-### 7. Configure High Availability (HA)
+### Configure High Availability (HA)
 
 1. In the Proxmox web interface, navigate to Datacenter > HA.
-2. Click Enable HA and follow the on-screen instructions to configure fencing and other settings.
+2. Click Enable HA and follow the on-screen instructions to configure fencing
+   and other settings.
 3. Ensure that HA resources are distributed evenly across all nodes.
 
-### 8. Test Failover
+### Test Failover
+
+<Callout type="default">
+  For failover to function correctly, you need to setup shared storage. Proxmox
+  supports various storage types, including NFS, Ceph, and iSCSI. We have a
+  guide on settings up shared storage with Ceph on Proxmox
+  [here](/proxmox/shared-storage-using-ceph).
+</Callout>
 
 1. Create a test virtual machine or container on one of the nodes.
 2. Simulate a node failure by shutting down or disconnecting one of the nodes.
-3. Monitor the Proxmox web interface to ensure that the virtual machine/container fails over to another node automatically.
+3. Monitor the Proxmox web interface to ensure that the virtual
+   machine/container fails over to another node automatically.
 4. Verify that there is no downtime for the virtual machine/container.
+
+</Steps>
 
 ## Conclusion
 
-By following this guide, you've successfully set up a Proxmox cluster with a minimum of three nodes, providing high availability and resilience to node failures. You can now deploy and manage virtual machines and containers with confidence.
+By following this guide, you've successfully set up a Proxmox cluster with a
+minimum of three nodes, providing high availability and resilience to node
+failures. You can now deploy and manage virtual machines and containers with
+confidence.
 
 Happy virtualizing!

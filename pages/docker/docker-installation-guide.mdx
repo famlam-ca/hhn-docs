@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout, Steps } from "nextra/components"
 
 # Installing Docker CLI on an Ubuntu Node
 
@@ -23,7 +23,8 @@ user that has sudo rights.
 
 ## Step-by-Step Guide
 
-1. **Open up a CLI**
+<Steps>
+### Open up a CLI
 
 This will depend on your linux distribution, however many will allow you to open
 open one from right-click context menu on your desktop, or searching for
@@ -33,7 +34,7 @@ open one from right-click context menu on your desktop, or searching for
   <sub>Tis Docker-cli, so expect many CLI actions.</sub>
 </sub>
 
-2. **Install Packages**
+### Install Packages
 
 Within your CLI enviroment, type
 
@@ -45,12 +46,12 @@ This will install docker compose and other packages needed for docker-cli. These
 will be used in different guides.  
 _You may be prompted yes/no, type "y" and press enter._
 
-3. **Wait for Installation to Finish**
+### Wait for Installation to Finish
 
 The time will vary depending on your internet speeds and other factors. as long
 as it seems to be doing something it's probably fine.
 
-4. **Finish**
+### Finish
 
 Once it is finished installing (usually when it goes back to your prompt) you
 can continue on to other guides, _however it is highly recommended and future
@@ -72,6 +73,8 @@ This will allow you to run docker-cli commands without prefixing "sudo" to them.
   _You will not need to do this if you run all commands as root or are the root
   user._
 </Callout>
+
+</Steps>
 
 ## Troubleshooting
 
