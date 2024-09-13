@@ -10,10 +10,8 @@
 
 - Updated packages
 - Added `<Steps>` to `STYLE_GUIDELINES`
-- Updated `styling-guide` for clearity
-- Updated `want-to-contribute` for clearity
-
-**Bug fixes**
+- Updated `styling-guide` for clarity
+- Updated `want-to-contribute` for clarity
 
 **Full Changelog**:
 [1.0.8...1.0.9](https://github.com/famlam-ca/hhn-documentation/compare/1.0.8...1.0.9)
