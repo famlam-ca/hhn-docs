@@ -17,10 +17,8 @@ Blockquotes can be styled by adding a class to the `blockquote` element.
 
 > \>
 
-```md copy filename="Blockquote example 2"
-<blockquote className="info">
-    Your text here
-</blockquote>
+```mdx copy filename="Blockquote example 2"
+<blockquote className="info">Your text here</blockquote>
 ```
 
 <blockquote>className=""</blockquote>
@@ -59,8 +57,8 @@ This is a code block
 Code blocks can also be syntax highlighted by specifying the language after the
 first set of backticks.
 
-````mdx copy /const/ filename="Markdown"
-```js /const/
+````mdx copy filename="Markdown"
+```js
 const foo = "bar"
 ```
 ````
@@ -68,7 +66,13 @@ const foo = "bar"
 Substring and line highlighting is possible by specifying them after the
 language.
 
-````mdx filename="Markdown" {2,5-6}
+````mdx copy /const/ filename="Substring highlighting"
+```js /const/
+const foo = "bar"
+```
+````
+
+````mdx copy {2,5-6} filename="Line highlighting"
 ```js {1,4-5}
 import { useState } from "react"
 
@@ -112,9 +116,9 @@ Result:
 
 We already support tailwind CSS out of the box. If you want to add your own
 custom CSS classes, you can do so by adding them to the `globals.css` file,
-inside the `styles` directory.
+inside the `pages` directory.
 
-```css filename="styles/globals.css"
+```css filename="globals.css"
 .custom-class {
   color: red;
 }

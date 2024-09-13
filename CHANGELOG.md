@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.9 Changelog
+
+**Untracked**
+
+- Added `repo_forking.png`
+
+**Modified**
+
+- Updated packages
+- Added `<Steps>` to `STYLE_GUIDELINES`
+- Updated `styling-guide` for clearity
+- Updated `want-to-contribute` for clearity
+
+**Bug fixes**
+
+**Full Changelog**:
+[1.0.8...1.0.9](https://github.com/famlam-ca/hhn-documentation/compare/1.0.8...1.0.9)
+
 ## 1.0.8 Changelog
 
 **New Guides**
@@ -31,7 +49,7 @@
 - Spelling and formatting in `NPM` guide
 
 **Full Changelog**:
-[1.0.7...1.0.8](https://github.com/famlam-ca/hhn-documentation/compare/1.0.6...1.0.7)
+[1.0.7...1.0.8](https://github.com/famlam-ca/hhn-documentation/compare/1.0.7...1.0.8)
 
 ## 1.0.7 Changelog
 
