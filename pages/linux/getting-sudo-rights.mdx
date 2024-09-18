@@ -40,17 +40,15 @@ _This file should be the same for most, if not all Linux Distributions._
 
 ### Add or Modify Sudo Users
 
-Look for Line:  
-`## User privilege specification`  
-Under `root ALL=(ALL:ALL) ALL`, add your user.
+Look for Line: `## User privilege specification` Under `root ALL=(ALL:ALL) ALL`,
+add your user.
 
 ```bash copy
 `<user> ALL=(ALL:ALL) ALL`
 ```
 
-_Press `i` to be able to type in text._  
-_Copying the existing format for Root, we are giving your user full sudo
-rights.<sup>[5](#notes)</sup>_
+_Press `i` to be able to type in text._ _Copying the existing format for Root,
+we are giving your user full sudo rights.<sup>[5](#notes)</sup>_
 
 ### Save your Edits
 
@@ -68,10 +66,9 @@ You may now exit back to your user.
 
 You may now use sudo for any commands you want to run as root or are too lazy to
 get proper access in place for with user/s you have added to the sudoers list.
-Happy Linuxing!  
-_You will have to enter your user password to run a sudo'd command. It seems to
-have a "idle" period where you don't need to enter it for a while if you keep
-using sudo._
+Happy Linuxing! _You will have to enter your user password to run a sudo'd
+command. It seems to have a "idle" period where you don't need to enter it for a
+while if you keep using sudo._
 
 ## Notes
 
@@ -92,3 +89,6 @@ using sudo._
    can be sudo'd, allowing sudo for groups, the file may tell you what you can
    do. Or just allow full access because why not.
 6. This will depend on your editer. `Ctrl-X` `Enter` `Enter` for Nano users.
+
+This guide was written by
+[u/DesPartedNecturm](https://github.com/DesPartedNecturm).

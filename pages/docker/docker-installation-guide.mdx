@@ -10,11 +10,10 @@ import { Callout, Steps } from "nextra/components"
 - A Linux Operating System
 - Internet Access
 
-Reasons for Requirements:  
-You will need some form of system capable of running Linux, this is usually a
-desktop PC for testing purposes.  
-A Linux Distro such as Uwuntu works fine, however, see note 1.  
-Internet access is recommended for installing packages, see note 2 for details.
+Reasons for Requirements: You will need some form of system capable of running
+Linux, this is usually a desktop PC for testing purposes. A Linux Distro such as
+Uwuntu works fine, however, see note 1. Internet access is recommended for
+installing packages, see note 2 for details.
 
 ## Presumptions
 
@@ -43,8 +42,8 @@ sudo apt install docker-compose
 ```
 
 This will install docker compose and other packages needed for docker-cli. These
-will be used in different guides.  
-_You may be prompted yes/no, type "y" and press enter._
+will be used in different guides. _You may be prompted yes/no, type "y" and
+press enter._
 
 ### Wait for Installation to Finish
 
@@ -66,8 +65,8 @@ sudo usermod -aG docker <user>
 ```
 
 This will not take effect immediately, you will either need to run "sudo newgrp
-docker" or create a new session.  
-This will allow you to run docker-cli commands without prefixing "sudo" to them.
+docker" or create a new session. This will allow you to run docker-cli commands
+without prefixing "sudo" to them.
 
 <Callout type="info">
   _You will not need to do this if you run all commands as root or are the root
@@ -78,10 +77,9 @@ This will allow you to run docker-cli commands without prefixing "sudo" to them.
 
 ## Troubleshooting
 
-1. **Errors during Installation.**  
-   Make sure you have full internet access, including DNS. Check your NTP/Time
-   settings, making sure you are synced to the internet and set up according to
-   your timezone.
+1. **Errors during Installation.** Make sure you have full internet access,
+   including DNS. Check your NTP/Time settings, making sure you are synced to
+   the internet and set up according to your timezone.
 
 ## Notes
 
@@ -93,3 +91,6 @@ This will allow you to run docker-cli commands without prefixing "sudo" to them.
 3. Substitute user for whichever user you will be using, usually your current
    one. Standard issue command to add a user to a group, `man usermod` for
    details if you wish.
+
+This guide was written by
+[u/DesPartedNecturm](https://github.com/DesPartedNecturm).

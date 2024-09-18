@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.10 Changelog
+
+**New Guides**
+
+- `Setup CS:GO and CS2 separately`
+
+**Untracked**
+
+- Added `gaming` and `steam` directories
+- Added images for `Setup CS:GO and CS2 separately` guide
+
+**Modified**
+
+- Added `credits` sections to community guides
+
 ## 1.0.9 Changelog
 
 **Untracked**
