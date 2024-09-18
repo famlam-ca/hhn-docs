@@ -15,6 +15,19 @@
 
 - Added `credits` sections to community guides
 
+## What's Changed
+
+- Create Setup-CSGO+CS2-Separately.mdx by @byeet in
+  https://github.com/famlam-ca/hhn-documentation/pull/4
+
+## New Contributors
+
+- @byeet made their first contribution in
+  https://github.com/famlam-ca/hhn-documentation/pull/4
+
+**Full Changelog**:
+[1.0.9...1.0.10](https://github.com/famlam-ca/hhn-documentation/compare/1.0.9...1.0.10)
+
 ## 1.0.9 Changelog
 
 **Untracked**
