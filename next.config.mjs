@@ -5,9 +5,9 @@ const withNextra = nextra({
   themeConfig: "./theme.config.tsx",
   latex: true,
   flexsearch: {
-    codeblocks: false,
+    codeblocks: false
   },
-  defaultShowCopyCode: true,
+  defaultShowCopyCode: true
 })
 
 export default withNextra({
@@ -15,8 +15,8 @@ export default withNextra({
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*.famlam.ca",
-      },
-    ],
-  },
+        hostname: "*.famlam.ca"
+      }
+    ]
+  }
 })
